@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">DribbleCliMoxyDaggerRx</string>
+    <string name="app_name">DribbbleCliMVP</string>
+    <string name="app_name_1">DribbbleCli</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="lore_ispum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</string>
+    <string name="nv_logout">Logout</string>
+    <string name="sort_shots">Sort shots</string>
+    <string name="popular">popular</string>
+    <string name="most_viewed">most viewed</string>
+    <string name="most_commented">most commented</string>
+    <string name="login_act_button_text">Sign in</string>
+    <string name="john_smith">John Smith</string>
+    <string name="desighner_in_google_inc">Desighner in Google Inc.</string>
+    <string name="new_york">New York</string>
+    <string name="count">100</string>
+    <string name="title">Title</string>
+    <string name="by_john_smith">by John Smith</string>
+    <string name="_00_00_0000">00-00-0000</string>
+
 </resources>

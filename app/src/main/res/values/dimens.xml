@@ -1,0 +1,41 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_offset">10dp</dimen>
+    <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="backdrop_title">30dp</dimen>
+    <dimen name="backdrop_subtitle">18dp</dimen>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_album_radius">0dp</dimen>
+    <dimen name="shot_cover_height">160dp</dimen>
+    <dimen name="shot_title_padding">10dp</dimen>
+    <dimen name="shot_title">15sp</dimen>
+    <dimen name="shot_padding_bottom">5dp</dimen>
+    <dimen name="shot_text_item_size">12sp</dimen>
+
+
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="login_act_label_text_size">40sp</dimen>
+    <dimen name="login_act_label_margin_bottom">100dp</dimen>
+    <dimen name="login_act_button_text_size">20sp</dimen>
+
+    <dimen name="hav_header_height">192dp</dimen>
+    <dimen name="hav_header_padding">16dp</dimen>
+    <dimen name="hav_header_im_size">96dp</dimen>
+    <dimen name="hav_header_im_border_size">2dp</dimen>
+
+    <dimen name="shot_det_cv_margin_left_right">5dp</dimen>
+    <dimen name="shot_det_cv_margin_top">3dp</dimen>
+    <dimen name="shot_det_cont_margin">20dp</dimen>
+    <dimen name="shot_det_likes_margin">30dp</dimen>
+    <dimen name="shot_det_cv_description_margin_left_right">5dp</dimen>
+    <dimen name="shot_det_cv_description_margin_top">3dp</dimen>
+    <dimen name="shot_det_title_size">20sp</dimen>
+    <dimen name="shot_det_cv_description_margin">10dp</dimen>
+    <dimen name="shot_det_cv_description_size">15sp</dimen>
+    <dimen name="shot_cv_elevation">3dp</dimen>
+    <dimen name="attachm_count_size">20dp</dimen>
+</resources>

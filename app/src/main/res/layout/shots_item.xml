@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardview_light_background"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvShot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="@dimen/shot_cv_elevation"
+        card_view:cardCornerRadius="@dimen/card_album_radius">
+
+
+        <LinearLayout
+            android:id="@+id/rel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imShotItem"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shot_cover_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvShotTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/title"
+                android:paddingLeft="@dimen/shot_title_padding"
+                android:paddingRight="@dimen/shot_title_padding"
+                android:paddingTop="@dimen/shot_title_padding"
+                android:textColor="@color/album_title"
+                android:textSize="@dimen/shot_title" />
+
+            <TextView
+                android:id="@+id/tvShotAutor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/by_john_smith"
+                android:paddingBottom="@dimen/shot_padding_bottom"
+                android:paddingLeft="@dimen/shot_title_padding"
+                android:paddingRight="@dimen/shot_title_padding"
+                android:textSize="@dimen/shot_text_item_size" />
+
+            <TextView
+                android:id="@+id/tvShotDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|end"
+                android:gravity="bottom"
+                android:paddingLeft="@dimen/shot_title_padding"
+                android:paddingRight="@dimen/shot_title_padding"
+                android:text="@string/_00_00_0000"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

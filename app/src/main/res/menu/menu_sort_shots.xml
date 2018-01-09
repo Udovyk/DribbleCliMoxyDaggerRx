@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/activity_main_update_menu_item"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:title="@string/sort_shots"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/sort_popular"
+                android:title="@string/popular" />
+            <item
+                android:id="@+id/sort_most_viewed"
+                android:title="@string/most_viewed" />
+            <item
+                android:id="@+id/sort_most_commented"
+                android:title="@string/most_commented" />
+        </menu>
+    </item>
+
+</menu>
+
+
+
+
