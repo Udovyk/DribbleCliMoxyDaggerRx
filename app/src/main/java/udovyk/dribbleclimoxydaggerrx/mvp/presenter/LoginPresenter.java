@@ -1,10 +1,6 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
-import android.app.Notification;
 import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
@@ -12,11 +8,10 @@ import com.arellomobile.mvp.InjectViewState;
 
 import javax.inject.Inject;
 
-import udovyk.dribbleclimoxydaggerrx.MyApplication;
+import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.manager.ApiManager;
 import udovyk.dribbleclimoxydaggerrx.manager.PrefManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.LoginView;
-import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 
 
 @InjectViewState
@@ -30,8 +25,8 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     PrefManager prefManager;
 
     public LoginPresenter() {
-        //Todo add sth to MyApplication
-        MyApplication.getApplicationComponent().inject(this);
+        //Todo add sth to App
+        App.getApplicationComponent().inject(this);
     }
 
 
@@ -42,6 +37,10 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
     public void setLoginActivityContentView() {
         getViewState().setLoginActivityContentView();
+    }
+
+    public void startMainActivity() {
+        getViewState().startMainActivity();
     }
 
 

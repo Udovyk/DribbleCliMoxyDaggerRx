@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog;
  * Created by udovik.s on 09.01.2018.
  */
 
-public interface LoginView extends BaseMvpView{
+public interface LoginView {
 
     AlertDialog.Builder buildDialog(Context c);
 

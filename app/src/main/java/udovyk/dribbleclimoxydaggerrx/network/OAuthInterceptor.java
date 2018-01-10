@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import udovyk.dribbleclimoxydaggerrx.MyApplication;
+import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 
 @Singleton
@@ -49,9 +49,9 @@ public class OAuthInterceptor implements Interceptor {
 
     //Todo use a Router?
     private void startLoginActivity() {
-        Intent i = new Intent(MyApplication.instance, LoginActivity.class);
+        Intent i = new Intent(App.INSTANCE, LoginActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        MyApplication.instance.startActivity(i);
+        App.INSTANCE.startActivity(i);
     }
 }
