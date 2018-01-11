@@ -2,9 +2,11 @@ package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
 import javax.inject.Inject;
 
+import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import udovyk.dribbleclimoxydaggerrx.App;
+import udovyk.dribbleclimoxydaggerrx.Screens;
 import udovyk.dribbleclimoxydaggerrx.manager.PrefManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.MainActivityView;
 
@@ -12,7 +14,7 @@ import udovyk.dribbleclimoxydaggerrx.mvp.view.MainActivityView;
  * Created by udovik.s on 10.01.2018.
  */
 
-public class MainActivityPresenter extends BasePresenter<MainActivityView>{
+public class MainActivityPresenter extends BasePresenter<MainActivityView> {
 
     @Inject
     NavigatorHolder navigatorHolder;
@@ -23,5 +25,22 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView>{
 
     public MainActivityPresenter() {
         App.getApplicationComponent().inject(this);
+    }
+
+    public void initScreen() {
+        if (prefManager.containsToken()) {
+            router.replaceScreen(Screens.SHOTS_FRAGMENT_SCREEN);
+        } else {
+            router.replaceScreen(Screens.START_SCREEN_FRAGMENT_SCREEN);
+        }
+    }
+
+
+    public void setNavigator(Navigator navigator) {
+        navigatorHolder.setNavigator(navigator);
+    }
+
+    public void removeNavigator() {
+        navigatorHolder.removeNavigator();
     }
 }

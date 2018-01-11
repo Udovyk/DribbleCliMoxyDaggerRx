@@ -12,7 +12,7 @@ import udovyk.dribbleclimoxydaggerrx.common.TokenDetails;
 
 public class PrefManager {
 
-    public static void saveAccessToken(String accessToken, String tokenType) {
+    public void saveAccessToken(String accessToken, String tokenType) {
         SharedPreferences sp = App.INSTANCE.getSharedPreferences(TokenDetails.OAUTH_SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sp.edit();
         if (sp.contains(TokenDetails.SP_TOKEN_KEY) || sp.contains(TokenDetails.SP_TOKEN_TYPE_KEY)) {
@@ -21,5 +21,10 @@ public class PrefManager {
         ed.putString(TokenDetails.SP_TOKEN_KEY, accessToken);
         ed.putString(TokenDetails.SP_TOKEN_TYPE_KEY, tokenType);
         ed.commit();
+    }
+
+    public boolean containsToken() {
+        //Todo resolve check token logic
+        return false;
     }
 }

@@ -4,7 +4,7 @@ import ru.terrakok.cicerone.Cicerone;
 import udovyk.dribbleclimoxydaggerrx.di.components.ApplicationComponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ApiModule;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ApplicationModule;
-import udovyk.dribbleclimoxydaggerrx.di.modules.CiceronModule;
+import udovyk.dribbleclimoxydaggerrx.di.modules.CiceroneModule;
 
 public class App extends android.app.Application {
 
@@ -19,7 +19,7 @@ public class App extends android.app.Application {
                 .builder()
                 .apiModule(new ApiModule())
                 .applicationModule(new ApplicationModule(this))
-                .ciceronModule(new CiceronModule(Cicerone.create()))
+                .ciceronModule(new CiceroneModule(Cicerone.create()))
                 .build();
     }
 

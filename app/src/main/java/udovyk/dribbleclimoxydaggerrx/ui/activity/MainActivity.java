@@ -28,6 +28,12 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     @Override
     protected void onPause() {
         super.onPause();
+        presenter.removeNavigator();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         presenter.setNavigator(baseNavigator);
     }
 

@@ -16,9 +16,11 @@ import udovyk.dribbleclimoxydaggerrx.di.components.ActivityComponent;
 import udovyk.dribbleclimoxydaggerrx.di.components.ApplicationComponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ActivityModule;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.BaseMvpView;
+import udovyk.dribbleclimoxydaggerrx.ui.fragment.ShotAttachmentsFragment;
+import udovyk.dribbleclimoxydaggerrx.ui.fragment.ShotDetailsFragment;
 import udovyk.dribbleclimoxydaggerrx.ui.fragment.ShotsFragment;
-import udovyk.dribbleclimoxydaggerrx.ui.fragment.SignInFragment;
-import udovyk.dribbleclimoxydaggerrx.ui.fragment.StartLoginFragment;
+import udovyk.dribbleclimoxydaggerrx.ui.fragment.LoginFragment;
+import udovyk.dribbleclimoxydaggerrx.ui.fragment.StartScreenFragment;
 import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
 
 /**
@@ -32,12 +34,16 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
         @Override
         protected Fragment createFragment(String screenKey, Object data) {
             switch (screenKey) {
-                case Screens.START_LOGIN_FRAGMENT_SCREEN:
-                    return StartLoginFragment.newInstance();
-                case Screens.SIGN_IN_FRAGMENT_SCREEN:
-                    return SignInFragment.newInstance();
+                case Screens.START_SCREEN_FRAGMENT_SCREEN:
+                    return StartScreenFragment.newInstance();
+                case Screens.LOGIN_FRAGMENT_SCREEN:
+                    return LoginFragment.newInstance();
                 case Screens.SHOTS_FRAGMENT_SCREEN:
                     return ShotsFragment.newInstance();
+                case Screens.SHOT_DETAILS_FRAGMENT_SCREEN:
+                    return ShotDetailsFragment.newInstance();
+                case Screens.SHOT_ATTACHMENTS_FRAGMENT_SCREEN:
+                    return ShotAttachmentsFragment.newInstance();
             }
             return null;
         }

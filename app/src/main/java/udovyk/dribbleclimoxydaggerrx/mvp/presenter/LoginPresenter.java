@@ -25,7 +25,6 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     PrefManager prefManager;
 
     public LoginPresenter() {
-        //Todo add sth to App
         App.getApplicationComponent().inject(this);
     }
 

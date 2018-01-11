@@ -1,6 +1,5 @@
 package udovyk.dribbleclimoxydaggerrx.network;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -11,7 +10,6 @@ import javax.inject.Singleton;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 
 @Singleton
@@ -34,24 +32,9 @@ public class OAuthInterceptor implements Interceptor {
             builder.header("Authorization", accessTokenType + " " + accessToken);
         } else {
             Log.e(TAG, "In the interceptor there is a trouble with : " + accessTokenType + " " + accessToken);
-            //you should launch the loginActivity to fix that:
-            startLoginActivity();
         }
 
-        Response response = chain.proceed(builder.build());
-        //handle 401 unauthorized
-        if (response.code() == 401) {
-            startLoginActivity();
-            return response;
-        }
         return chain.proceed(builder.build());
     }
 
-    //Todo use a Router?
-    private void startLoginActivity() {
-        Intent i = new Intent(App.INSTANCE, LoginActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        App.INSTANCE.startActivity(i);
-    }
 }
