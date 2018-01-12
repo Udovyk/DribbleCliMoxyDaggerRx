@@ -2,6 +2,7 @@ package udovyk.dribbleclimoxydaggerrx;
 
 import ru.terrakok.cicerone.Cicerone;
 import udovyk.dribbleclimoxydaggerrx.di.components.ApplicationComponent;
+import udovyk.dribbleclimoxydaggerrx.di.components.DaggerApplicationComponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ApiModule;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ApplicationModule;
 import udovyk.dribbleclimoxydaggerrx.di.modules.CiceroneModule;
@@ -19,7 +20,7 @@ public class App extends android.app.Application {
                 .builder()
                 .apiModule(new ApiModule())
                 .applicationModule(new ApplicationModule(this))
-                .ciceronModule(new CiceroneModule(Cicerone.create()))
+                .ciceroneModule(new CiceroneModule(Cicerone.create()))
                 .build();
     }
 

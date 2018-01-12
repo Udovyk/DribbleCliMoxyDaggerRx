@@ -9,6 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import udovyk.dribbleclimoxydaggerrx.network.model.Attachment;
 import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
@@ -20,8 +21,9 @@ public interface ApiService {
      * The call to request a token
      */
     @FormUrlEncoded
-    @POST("oauth/token")
+    @POST
     Observable<OAuthToken> getAcccessToken(
+            @Url String url,
             @Field("client_id") String client_id,
             @Field("client_secret") String client_secret,
             @Field("code") String code,

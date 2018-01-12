@@ -41,9 +41,9 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
                 case Screens.SHOTS_FRAGMENT_SCREEN:
                     return ShotsFragment.newInstance();
                 case Screens.SHOT_DETAILS_FRAGMENT_SCREEN:
-                    return ShotDetailsFragment.newInstance();
+                   // return ShotDetailsFragment.newInstance();
                 case Screens.SHOT_ATTACHMENTS_FRAGMENT_SCREEN:
-                    return ShotAttachmentsFragment.newInstance();
+                    //return ShotAttachmentsFragment.newInstance();
             }
             return null;
         }

@@ -51,7 +51,7 @@ public abstract class BaseFragment  extends MvpAppCompatFragment implements Base
     }
 
     private ActivityComponent getActivityComponent() {
-        return ((BaseActivity) getActivity().getActivityComponent());
+        return ((BaseActivity) getActivity()).getActivityComponent();
     }
 
     public FragmentComponent getFragmentComponent() {

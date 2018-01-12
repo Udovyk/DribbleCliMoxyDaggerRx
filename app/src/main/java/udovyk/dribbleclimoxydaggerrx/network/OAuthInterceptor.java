@@ -12,7 +12,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 
-@Singleton
 public class OAuthInterceptor implements Interceptor {
     private static final String TAG = "OAuthInterceptor";
 

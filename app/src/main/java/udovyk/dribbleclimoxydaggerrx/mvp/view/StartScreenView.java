@@ -5,4 +5,6 @@ package udovyk.dribbleclimoxydaggerrx.mvp.view;
  */
 
 public interface StartScreenView extends BaseMvpView {
+
+    void showNoInternetConnectionDialog();
 }

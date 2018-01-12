@@ -1,5 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
+import android.widget.Toast;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpView;
 
@@ -26,5 +28,9 @@ public class StartScreenPresenter extends BasePresenter<StartScreenView> {
 
     public void goToLoginScreen() {
         router.replaceScreen(Screens.LOGIN_FRAGMENT_SCREEN);
+    }
+
+    public void showDialog() {
+        getViewState().showNoInternetConnectionDialog();
     }
 }

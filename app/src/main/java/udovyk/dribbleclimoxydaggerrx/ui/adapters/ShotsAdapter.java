@@ -1,3 +1,4 @@
+/*
 package udovyk.dribbleclimoxydaggerrx.ui.adapters;
 
 
@@ -157,9 +158,11 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    /*
+    */
+/*
     * Helpers
-    * */
+    * *//*
+
     public void add(Shot shot) {
         shotsList.add(shot);
         notifyItemInserted(shotsList.size() - 1);
@@ -224,9 +227,11 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    /*
+    */
+/*
     * View Holders_________________________________________________________________________________________________________________________
-    * */
+    * *//*
+
 
     protected class ShotsVH extends RecyclerView.ViewHolder {
 
@@ -257,3 +262,4 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 }
+*/

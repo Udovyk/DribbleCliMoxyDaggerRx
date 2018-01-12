@@ -1,14 +1,11 @@
 package udovyk.dribbleclimoxydaggerrx.manager;
 
-import android.content.Context;
-
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
 import udovyk.dribbleclimoxydaggerrx.common.ApiConstants;
 import udovyk.dribbleclimoxydaggerrx.common.ShotsRequestConstants;
 import udovyk.dribbleclimoxydaggerrx.network.ApiService;
@@ -20,44 +17,36 @@ import udovyk.dribbleclimoxydaggerrx.network.retrofit.RetrofitBuilder;
 
 public class ApiManager {
 
-    private Context context;
-    private ApiService simpleClient;
-    private ApiService authClient;
+    private ApiService apiService;
 
-    public ApiManager() {
-        simpleClient = RetrofitBuilder.getSimpleClient();
+    public ApiManager(ApiService apiService) {
+        this.apiService = apiService;
     }
-
-    public ApiManager(Context context) {
-        this.context = context;
-        authClient = RetrofitBuilder.getOAuthClient(this.context);
-    }
-
 
     public Observable<OAuthToken> getAccessToken(String code) {
-        Observable<OAuthToken> getRequestTokenFormCall = simpleClient.getAcccessToken(
+        return apiService.getAcccessToken(
+                ApiConstants.BASE_URL_OAUTH,
                 ApiConstants.DRIBBBLE_CLIENT_ID,
                 ApiConstants.DRIBBBLE_CLIENT_SECRET,
                 code,
                 ApiConstants.DRIBBBLE_AUTHORIZE_CALLBACK_URI)
                 .compose(applyTransformers());
-        return getRequestTokenFormCall;
     }
 
     public Observable<User> getUserInfo() {
-        return authClient
+        return apiService
                 .getAuthUser()
                 .compose(applyTransformers());
     }
 
     public Observable<List<Shot>> callForShots(int currentPage, String sortValue) {
-        return authClient
+        return apiService
                 .fetchShotsPerPageSort(currentPage, ShotsRequestConstants.PER_PAGE, ShotsRequestConstants.LIST_BY_DEFAULT, sortValue)
                 .compose(applyTransformers());
     }
 
     public Observable<List<Attachment>> callForShotsAttachmetns(int idOfShot) {
-        return authClient
+        return apiService
                 .getShotAttachments(idOfShot)
                 .compose(applyTransformers());
     }

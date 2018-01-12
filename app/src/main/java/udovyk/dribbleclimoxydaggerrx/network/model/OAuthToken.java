@@ -6,8 +6,8 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
-import udovyk.dribbbleclimvp.MyApplication;
-import udovyk.dribbbleclimvp.utils.TokenDetails;
+import udovyk.dribbleclimoxydaggerrx.App;
+import udovyk.dribbleclimoxydaggerrx.common.TokenDetails;
 
 
 public class OAuthToken {
@@ -63,7 +63,7 @@ public class OAuthToken {
         public static OAuthToken create() {
 
             OAuthToken oAuthToken = new OAuthToken();
-            SharedPreferences sp = MyApplication.instance.getSharedPreferences(OAUTH_SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+            SharedPreferences sp = App.INSTANCE.getSharedPreferences(OAUTH_SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
             if (sp.contains(TokenDetails.SP_TOKEN_KEY) && sp.contains(TokenDetails.SP_TOKEN_TYPE_KEY)) {
                 oAuthToken.setAccessToken(sp.getString(TokenDetails.SP_TOKEN_KEY, null));
                 oAuthToken.setTokenType(sp.getString(TokenDetails.SP_TOKEN_TYPE_KEY, null));
@@ -76,22 +76,6 @@ public class OAuthToken {
         }
     }
 
-    /*
-    *
-    * Save token data
-    *
-    * */
-    public void saveAccessToken(String accessToken, String tokenType) {
-        Log.e(TAG, "---Saving the the token data---");
 
-        SharedPreferences sp = MyApplication.instance.getSharedPreferences(TokenDetails.OAUTH_SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor ed = sp.edit();
-        if (sp.contains(TokenDetails.SP_TOKEN_KEY) || sp.contains(TokenDetails.SP_TOKEN_TYPE_KEY)) {
-            ed.clear().commit();
-        }
-        ed.putString(TokenDetails.SP_TOKEN_KEY, accessToken);
-        ed.putString(TokenDetails.SP_TOKEN_TYPE_KEY, tokenType);
-        ed.commit();
-    }
 
 }

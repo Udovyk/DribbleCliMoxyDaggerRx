@@ -1,6 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.di.components;
 
 import dagger.Component;
+import dagger.Subcomponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ActivityModule;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ApplicationModule;
 import udovyk.dribbleclimoxydaggerrx.di.modules.FragmentModule;
@@ -14,7 +15,7 @@ import udovyk.dribbleclimoxydaggerrx.ui.activity.MainActivity;
  */
 
 @ActivityScope
-@Component(modules = ActivityModule.class)
+@Subcomponent(modules = ActivityModule.class)
 public interface ActivityComponent {
 
     FragmentComponent providesFragmentComponent(FragmentModule fragmentModule);
