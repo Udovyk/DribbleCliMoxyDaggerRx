@@ -16,9 +16,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class PrefManager {
 
     @Inject
-    public PrefManager() {
+    public PrefManager() {}
 
-    }
     public void saveAccessToken(String accessToken, String tokenType) {
         SharedPreferences sp = App.INSTANCE.getSharedPreferences(TokenDetails.OAUTH_SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor ed = sp.edit();
@@ -34,5 +33,10 @@ public class PrefManager {
         return App.INSTANCE
                 .getSharedPreferences(TokenDetails.OAUTH_SHARED_PREFERENCE_NAME, MODE_PRIVATE)
                 .contains(TokenDetails.SP_TOKEN_KEY) ? true : false;
+    }
+
+    //Todo clear sp
+    public void clearSharedPref() {
+        //impl
     }
 }

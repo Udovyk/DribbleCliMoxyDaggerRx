@@ -1,5 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
+import com.arellomobile.mvp.InjectViewState;
+
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Navigator;
@@ -14,6 +16,7 @@ import udovyk.dribbleclimoxydaggerrx.mvp.view.MainActivityView;
  * Created by udovik.s on 10.01.2018.
  */
 
+@InjectViewState
 public class MainActivityPresenter extends BasePresenter<MainActivityView> {
 
     @Inject
@@ -30,6 +33,11 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView> {
     public void initScreen() {
         if (prefManager.containsToken()) {
             router.replaceScreen(Screens.SHOTS_FRAGMENT_SCREEN);
+
+            getViewState().setupDrawerToggleButton();
+            getViewState().setupDrawerContent();
+            //Todo set userdata to nv
+            //getViewState().setUserToNavigationview();
         } else {
             router.replaceScreen(Screens.START_SCREEN_FRAGMENT_SCREEN);
         }

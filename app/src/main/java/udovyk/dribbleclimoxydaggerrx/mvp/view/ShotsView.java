@@ -5,4 +5,6 @@ package udovyk.dribbleclimoxydaggerrx.mvp.view;
  */
 
 public interface ShotsView extends BaseMvpView {
+
+
 }

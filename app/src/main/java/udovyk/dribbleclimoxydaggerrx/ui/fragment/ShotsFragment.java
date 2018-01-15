@@ -16,11 +16,8 @@ import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotsView;
 
 public class ShotsFragment extends BaseFragment implements ShotsView {
 
-    /*@InjectPresenter
-    ShotsPresenter presenter;*/
-
-    @BindView(R.id.test)
-    TextView textView;
+    @InjectPresenter
+    ShotsPresenter presenter;
 
     public static ShotsFragment newInstance() {
         ShotsFragment fragment = new ShotsFragment();
@@ -30,7 +27,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     }
     @Override
     protected int getLayoutRes() {
-        return R.layout.test_layout;
+        return R.layout.shots_fragment;
     }
 
     @Override
