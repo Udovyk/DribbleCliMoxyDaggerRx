@@ -6,6 +6,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 import udovyk.dribbleclimoxydaggerrx.common.ApiConstants;
 import udovyk.dribbleclimoxydaggerrx.common.ShotsRequestConstants;
 import udovyk.dribbleclimoxydaggerrx.network.ApiService;
@@ -23,9 +24,9 @@ public class ApiManager {
         this.apiService = apiService;
     }
 
-    public Observable<OAuthToken> getAccessToken(String code) {
+    public Observable<Response<OAuthToken>> getAccessToken(String code) {
         return apiService.getAcccessToken(
-                ApiConstants.BASE_URL_OAUTH,
+                ApiConstants.DRIBBBLE_GET_ACCESS_TOKEN_URL,
                 ApiConstants.DRIBBBLE_CLIENT_ID,
                 ApiConstants.DRIBBBLE_CLIENT_SECRET,
                 code,

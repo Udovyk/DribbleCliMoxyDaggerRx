@@ -15,6 +15,7 @@ import udovyk.dribbleclimoxydaggerrx.common.Utils;
 import udovyk.dribbleclimoxydaggerrx.manager.ApiManager;
 import udovyk.dribbleclimoxydaggerrx.manager.PrefManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.LoginView;
+import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 
 
 @InjectViewState
@@ -34,10 +35,11 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
     public void getAccessToken(String code) {
         apiManager.getAccessToken(code)
-                .subscribe(oAuthToken -> {
+                .subscribe(oAuthTokenResponse -> {
                     Log.d(TAG, "trying to save token data into SP");
-                    String accessToken = oAuthToken.getAccessToken();
-                    String tokenType = oAuthToken.getTokenType();
+                    OAuthToken token = oAuthTokenResponse.body();
+                    String accessToken = token.getAccessToken();
+                    String tokenType = token.getTokenType();
                     Log.d(TAG, "getToken: token == " + accessToken);
 
                     prefManager.saveAccessToken(accessToken, tokenType);

@@ -20,13 +20,14 @@ public class OAuthInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        //find the token
+
         OAuthToken oAuthToken = OAuthToken.Factory.create();
-        accessToken = oAuthToken.getAccessToken();
-        accessTokenType = oAuthToken.getTokenType();
-        //add it to the request
         Request.Builder builder = chain.request().newBuilder();
-        if (!TextUtils.isEmpty(accessToken) && !TextUtils.isEmpty(accessTokenType)) {
+
+        if (!(oAuthToken == null)) {
+            accessToken = oAuthToken.getAccessToken();
+            accessTokenType = oAuthToken.getTokenType();
+
             Log.e(TAG, "In the interceptor adding the header authorization with : " + accessTokenType + " " + accessToken);
             builder.header("Authorization", accessTokenType + " " + accessToken);
         } else {
