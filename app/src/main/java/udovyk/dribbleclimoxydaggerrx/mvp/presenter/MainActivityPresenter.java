@@ -33,16 +33,14 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView> {
     public void initScreen() {
         if (prefManager.containsToken()) {
             router.replaceScreen(Screens.SHOTS_FRAGMENT_SCREEN);
-
-            getViewState().setupDrawerToggleButton();
-            getViewState().setupDrawerContent();
-            //Todo set userdata to nv
-            //getViewState().setUserToNavigationview();
         } else {
             router.replaceScreen(Screens.START_SCREEN_FRAGMENT_SCREEN);
         }
     }
 
+    public void clearSharedPref() {
+        prefManager.clearSharedPref();
+    }
 
     public void setNavigator(Navigator navigator) {
         navigatorHolder.setNavigator(navigator);

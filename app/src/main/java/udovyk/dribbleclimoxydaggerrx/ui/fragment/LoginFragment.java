@@ -8,7 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -23,6 +25,7 @@ import udovyk.dribbleclimoxydaggerrx.R;
 import udovyk.dribbleclimoxydaggerrx.common.ApiConstants;
 import udovyk.dribbleclimoxydaggerrx.mvp.presenter.LoginPresenter;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.LoginView;
+import udovyk.dribbleclimoxydaggerrx.ui.activity.MainActivity;
 
 /**
  * Created by udovik.s on 10.01.2018.
@@ -44,6 +47,19 @@ public class LoginFragment extends BaseFragment implements LoginView {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ((MainActivity)getActivity()).lockDrawer();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((MainActivity)getActivity()).unlockDrawer();
     }
 
     @Override

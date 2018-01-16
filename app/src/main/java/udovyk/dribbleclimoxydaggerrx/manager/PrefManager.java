@@ -37,6 +37,7 @@ public class PrefManager {
 
     //Todo clear sp
     public void clearSharedPref() {
-        //impl
+        App.INSTANCE.getSharedPreferences(TokenDetails.OAUTH_SHARED_PREFERENCE_NAME, MODE_PRIVATE)
+                .edit().clear().commit();
     }
 }

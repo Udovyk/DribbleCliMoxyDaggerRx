@@ -59,7 +59,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
         }
     };
 
-    private ActivityComponent activityComponent;
+        public ActivityComponent activityComponent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
         initViews();
     }
 
-    private void initViews() {
+    public void initViews() {
         setContentView(getLayoutRes());
         ButterKnife.bind(this);
     }

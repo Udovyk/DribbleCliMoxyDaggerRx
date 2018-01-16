@@ -1,6 +1,11 @@
 package udovyk.dribbleclimoxydaggerrx.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -13,6 +18,7 @@ import udovyk.dribbleclimoxydaggerrx.common.Utils;
 import udovyk.dribbleclimoxydaggerrx.manager.PrefManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.presenter.StartScreenPresenter;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.StartScreenView;
+import udovyk.dribbleclimoxydaggerrx.ui.activity.MainActivity;
 
 /**
  * Created by udovik.s on 10.01.2018.
@@ -31,6 +37,19 @@ public class StartScreenFragment extends BaseFragment implements StartScreenView
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ((MainActivity)getActivity()).lockDrawer();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((MainActivity)getActivity()).unlockDrawer();
     }
 
     @Override

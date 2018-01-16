@@ -5,7 +5,9 @@ import android.support.v7.widget.Toolbar;
 
 public interface ToolbarActions {
 
+    void showDrawerToggleButton();
 
+    void showDrawerToggleButton(Toolbar toolbar);
 
     Toolbar getToolBar();
 

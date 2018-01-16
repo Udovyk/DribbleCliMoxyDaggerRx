@@ -25,6 +25,7 @@ public abstract class BaseFragment  extends MvpAppCompatFragment implements Base
 
     private FragmentComponent fragmentComponent;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         fragmentComponent = getActivityComponent()
@@ -48,6 +49,15 @@ public abstract class BaseFragment  extends MvpAppCompatFragment implements Base
 
     public void injectViews(View view) {
         ButterKnife.bind(this, view);
+
+    }
+
+    public void hideToolBar() {
+        ((BaseActivity)getActivity()).getSupportActionBar().hide();
+    }
+
+    public void showToolBar() {
+        ((BaseActivity)getActivity()).getSupportActionBar().show();
     }
 
     private ActivityComponent getActivityComponent() {
@@ -56,6 +66,18 @@ public abstract class BaseFragment  extends MvpAppCompatFragment implements Base
 
     public FragmentComponent getFragmentComponent() {
         return fragmentComponent;
+    }
+
+    public Toolbar getToolBar() {
+        return ((ToolbarActions) getActivity()).getToolBar();
+    }
+
+    public void showDrawerToggleButton() {
+        ((ToolbarActions) getActivity()).showDrawerToggleButton();
+    }
+
+    public void showDrawerToggleButton(Toolbar toolbar) {
+        ((ToolbarActions) getActivity()).showDrawerToggleButton(toolbar);
     }
 
     public void setSupportActionBar(Toolbar toolbar) {

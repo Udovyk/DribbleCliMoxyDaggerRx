@@ -6,6 +6,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarTheme" parent="@style/AppTheme">
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
+
     <style name="MyCardViewStyle" parent="Theme.AppCompat.Light">
         <item name="cardCornerRadius">2dp</item>
         <item name="cardElevation">5dp</item>
