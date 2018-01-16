@@ -34,7 +34,7 @@ public class ApiManager {
                 .compose(applyTransformers());
     }
 
-    public Observable<User> getUserInfo() {
+    public Observable<Response<User>> getUserInfo() {
         return apiService
                 .getAuthUser()
                 .compose(applyTransformers());

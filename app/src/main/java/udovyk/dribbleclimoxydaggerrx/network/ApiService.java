@@ -66,7 +66,7 @@ public interface ApiService {
     * Get authenticated user
     * */
     @GET("user")
-    Observable<User> getAuthUser();
+    Observable<Response<User>> getAuthUser();
 
     /*
     * Get attachments

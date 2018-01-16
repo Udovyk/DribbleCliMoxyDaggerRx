@@ -1,5 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 
 import javax.inject.Inject;
@@ -9,8 +11,10 @@ import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.Screens;
+import udovyk.dribbleclimoxydaggerrx.manager.ApiManager;
 import udovyk.dribbleclimoxydaggerrx.manager.PrefManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.MainActivityView;
+import udovyk.dribbleclimoxydaggerrx.network.model.User;
 
 /**
  * Created by udovik.s on 10.01.2018.
@@ -18,6 +22,7 @@ import udovyk.dribbleclimoxydaggerrx.mvp.view.MainActivityView;
 
 @InjectViewState
 public class MainActivityPresenter extends BasePresenter<MainActivityView> {
+    private static final String TAG = "MainPresenter";
 
     @Inject
     NavigatorHolder navigatorHolder;
@@ -25,6 +30,9 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView> {
     Router router;
     @Inject
     PrefManager prefManager;
+    @Inject
+    ApiManager apiManager;
+
 
     public MainActivityPresenter() {
         App.getApplicationComponent().inject(this);
@@ -33,10 +41,26 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView> {
     public void initScreen() {
         if (prefManager.containsToken()) {
             router.replaceScreen(Screens.SHOTS_FRAGMENT_SCREEN);
+            getAuthUser();
         } else {
             router.replaceScreen(Screens.START_SCREEN_FRAGMENT_SCREEN);
+
         }
     }
+
+    private void getAuthUser() {
+        apiManager.getUserInfo().subscribe(
+            userResponse -> {
+                User user = userResponse.body();
+                Log.d(TAG, "!!!! user success," + user.getName());
+                getViewState().setUserToNavigationview(user);
+            }, throwable -> {
+                throwable.printStackTrace();
+                    Log.d(TAG, "---request to AuthUser was failed");
+                }
+        );
+    }
+
 
     public void clearSharedPref() {
         prefManager.clearSharedPref();

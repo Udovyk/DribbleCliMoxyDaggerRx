@@ -2,14 +2,19 @@ package udovyk.dribbleclimoxydaggerrx.ui.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import udovyk.dribbleclimoxydaggerrx.R;
@@ -32,22 +37,25 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     @Inject
     Router router;*/
 
-    /*//region view binding
-    @BindView(R.id.userAvatar)
-    ImageView userAvatar;
-    @BindView(R.id.userName)
-    TextView userName;
-    @BindView(R.id.userBio)
-    TextView userBio;
-    @BindView(R.id.userLocation)
-    TextView userLocation;*/
-
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
     @BindView(R.id.nvView)
     NavigationView nvDrawer;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @Nullable
+    @BindView(R.id.userAvatar)
+    ImageView userAvatar;
+    @Nullable
+    @BindView(R.id.userName)
+    TextView userName;
+    @Nullable
+    @BindView(R.id.userBio)
+    TextView userBio;
+    @Nullable
+    @BindView(R.id.userLocation)
+    TextView userLocation;
 
     ActionBarDrawerToggle drawerToggle;
 
@@ -197,7 +205,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
 
     @Override
     public void setUserToNavigationview(User user) {
-        /*if (user != null) {
+        if (user != null) {
             Picasso.with(this)
                     .load(user.getAvatarUrl())
                     .into(userAvatar);
@@ -206,6 +214,6 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
             userLocation.setText(user.getLocation());
         } else {
             Log.d(TAG, "setInfoDataToNavView: Can't set data, user=null");
-        }*/
+        }
     }
 }
