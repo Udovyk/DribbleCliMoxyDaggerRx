@@ -40,25 +40,31 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView> {
 
     public void initScreen() {
         if (prefManager.containsToken()) {
-            router.replaceScreen(Screens.SHOTS_FRAGMENT_SCREEN);
             getAuthUser();
+            router.replaceScreen(Screens.SHOTS_FRAGMENT_SCREEN);
         } else {
             router.replaceScreen(Screens.START_SCREEN_FRAGMENT_SCREEN);
-
         }
     }
 
-    private void getAuthUser() {
+    public void getAuthUser() {
         apiManager.getUserInfo().subscribe(
-            userResponse -> {
-                User user = userResponse.body();
-                Log.d(TAG, "!!!! user success," + user.getName());
-                getViewState().setUserToNavigationview(user);
-            }, throwable -> {
-                throwable.printStackTrace();
+                userResponse -> {
+                    User user = userResponse.body();
+                    Log.d(TAG, "!!!! user success," + user.getName());
+                    getViewState().setUserToNavigationview(user);
+                }, throwable -> {
+                    throwable.printStackTrace();
                     Log.d(TAG, "---request to AuthUser was failed");
                 }
         );
+    }
+
+
+    public void setUserToNH() {
+        if (prefManager.containsToken()) {
+            getAuthUser();
+        }
     }
 
 

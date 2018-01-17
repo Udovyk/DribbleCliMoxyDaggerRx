@@ -3,7 +3,7 @@ package udovyk.dribbleclimoxydaggerrx.common;
 
 public class ApiConstants {
 
-    public static final String BASE_URL = "https://dribbble.com/";
+    public static final String BASE_URL = "https://api.dribbble.com/v2/";
     public static final String DRIBBBLE_GET_ACCESS_TOKEN_URL = "https://dribbble.com/oauth/token";
     public static final String BASE_URL_OAUTH = "https://api.dribbble.com/v1/oauth/token";
 

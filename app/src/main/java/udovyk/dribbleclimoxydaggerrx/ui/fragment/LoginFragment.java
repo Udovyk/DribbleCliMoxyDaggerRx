@@ -152,7 +152,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
                 + "&scope=" + ApiConstants.DRIBBBLE_AUTHORIZE_SCOPE);
     }
 
-
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_layout_login;

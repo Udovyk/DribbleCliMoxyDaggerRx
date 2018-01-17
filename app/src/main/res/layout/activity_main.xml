@@ -14,8 +14,7 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <FrameLayout
             android:id="@+id/activity_home_fragment_container"
@@ -31,5 +30,9 @@
         android:layout_gravity="start"
         android:background="@android:color/white"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_view" />
+        app:menu="@menu/drawer_view">
+
+        <include layout="@layout/nav_header" />
+
+    </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

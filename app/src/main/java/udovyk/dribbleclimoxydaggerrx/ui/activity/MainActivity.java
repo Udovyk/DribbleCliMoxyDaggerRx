@@ -2,7 +2,6 @@ package udovyk.dribbleclimoxydaggerrx.ui.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,15 +26,11 @@ import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
  * Created by udovik.s on 10.01.2018.
  */
 
-public class MainActivity extends BaseActivity implements MainActivityView, ToolbarActions{
+public class MainActivity extends BaseActivity implements MainActivityView, ToolbarActions {
     private static final String TAG = "MainActivity";
 
     @InjectPresenter
     MainActivityPresenter presenter;
-    /*@Inject
-    PrefManager prefManager;
-    @Inject
-    Router router;*/
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
@@ -44,27 +39,21 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Nullable
     @BindView(R.id.userAvatar)
     ImageView userAvatar;
-    @Nullable
     @BindView(R.id.userName)
     TextView userName;
-    @Nullable
     @BindView(R.id.userBio)
     TextView userBio;
-    @Nullable
     @BindView(R.id.userLocation)
     TextView userLocation;
 
     ActionBarDrawerToggle drawerToggle;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter.initScreen();
-
     }
 
     @Override
@@ -84,13 +73,14 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     }
 
     public void unlockDrawer() {
+
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        presenter.setUserToNH();
     }
 
     @Override
     public void initViews() {
         super.initViews();
-        //setSupportActionBar(toolbar);
         setupDrawerToggleButton();
         setupDrawerContent();
         mDrawer.addDrawerListener(drawerToggle);
@@ -161,7 +151,6 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
 
     @Override
     public void showDrawerToggleButton() {

@@ -39,8 +39,8 @@ public class ApiModule {
     @ApplicationScope
     public Retrofit getClient(OkHttpClient client) {
         return new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .baseUrl(BASE_URL)
                 .build();

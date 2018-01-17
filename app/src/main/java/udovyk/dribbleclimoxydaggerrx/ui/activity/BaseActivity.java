@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 import udovyk.dribbleclimoxydaggerrx.App;
@@ -60,6 +61,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
     };
 
         public ActivityComponent activityComponent;
+        private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,17 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
         initViews();
     }
 
+    @Override
+    protected void onDestroy() {
+        if(unbinder!=null){
+            unbinder.unbind();
+        }
+        super.onDestroy();
+    }
+
     public void initViews() {
         setContentView(getLayoutRes());
-        ButterKnife.bind(this);
+        unbinder =  ButterKnife.bind(this);
     }
 
     ApplicationComponent getApplicationComponent() {
