@@ -3,6 +3,8 @@ package udovyk.dribbleclimoxydaggerrx.di.modules;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
@@ -25,7 +27,6 @@ import udovyk.dribbleclimoxydaggerrx.network.ApiService;
 import udovyk.dribbleclimoxydaggerrx.network.OAuthInterceptor;
 
 import static udovyk.dribbleclimoxydaggerrx.common.ApiConstants.BASE_URL;
-import static udovyk.dribbleclimoxydaggerrx.common.ApiConstants.BASE_URL_OAUTH;
 
 /**
  * Created by udovik.s on 10.01.2018.

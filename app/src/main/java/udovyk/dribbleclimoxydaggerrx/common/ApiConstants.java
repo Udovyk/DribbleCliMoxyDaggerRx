@@ -3,17 +3,17 @@ package udovyk.dribbleclimoxydaggerrx.common;
 
 public class ApiConstants {
 
-    public static final String BASE_URL = "https://api.dribbble.com/v2/";
+    public static final String BASE_URL = "https://api.dribbble.com/v1/";
     public static final String DRIBBBLE_GET_ACCESS_TOKEN_URL = "https://dribbble.com/oauth/token";
-    public static final String BASE_URL_OAUTH = "https://api.dribbble.com/v1/oauth/token";
+    public static final String BASE_URL_OAUTH = "https://api.dribbble.com/v2/";
 
-    public static final String DRIBBBLE_CLIENT_ID = "f720b9f7138328482ff9f9494ab686fa486d29e2e2f042177438bb6eaf4eeb1e";
-    public static final String DRIBBBLE_CLIENT_SECRET = "c59bf4c2595b680e13444b5d42c73323cdcb6321f22ac644f059bb65966fec80";
+    public static final String DRIBBBLE_CLIENT_ID = "b02b5ca1e60b4823eac008badf4a5354adfbbceda9683cf6d88367303616bbc3";
+    public static final String DRIBBBLE_CLIENT_SECRET = "1ba71424c7b363b72fd991d8ce701c7a47856b15d711c8895f154d9f9ab4c5a9";
     public static final String DRIBBBLE_AUTHORIZE_SCOPE = "public";
     public static final String DRIBBBLE_AUTHORIZE_URL = "https://dribbble.com/oauth/authorize";
-    public static final String DRIBBBLE_AUTHORIZE_CALLBACK_URI = "sergapp3://callback3";
-    public static final String DRIBBBLE_AUTHORIZE_CALLBACK_URI_SCHEMA = "sergapp3";
-    public static final String DRIBBBLE_AUTHORIZE_CALLBACK_URI_HOST = "callback3";
+    public static final String DRIBBBLE_AUTHORIZE_CALLBACK_URI = "dribbbleclimvp://callback";
+    public static final String DRIBBBLE_AUTHORIZE_CALLBACK_URI_SCHEMA = "dribbbleclimvp";
+    public static final String DRIBBBLE_AUTHORIZE_CALLBACK_URI_HOST = "callback";
 
     public static final String CODE = "code";
     public static final String ERROR_CODE = "error";

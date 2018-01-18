@@ -1,24 +1,70 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Router;
+import udovyk.dribbleclimoxydaggerrx.App;
+import udovyk.dribbleclimoxydaggerrx.manager.ApiManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotsView;
+import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
 
 /**
  * Created by udovik.s on 10.01.2018.
  */
 
+@InjectViewState
 public class ShotsPresenter extends BasePresenter<ShotsView> {
+    private static String TAG = "ShotsPresenter";
 
-   /* @InjectPresenter
-    ShotsPresenter presenter;
-
-    @Inject
+    /*@Inject
     Router router;*/
+    @Inject
+    ApiManager apiManager;
+
+    public ShotsPresenter() {
+        App.getApplicationComponent().inject(this);
+    }
+
+    public void loadShotsPage(int currentPage, String sortValue) {
+        if (currentPage == 1) {
+            getViewState().showLoadingPb();
+        }
+
+        apiManager.callForShots(currentPage, sortValue)
+                .subscribe(
+                        listResponse -> {
+                            if (listResponse.isSuccessful()) {
+                                Log.d(TAG, "--Sending data to adapter");
+                                if (currentPage == 1) {
+                                    Log.d(TAG, "--Sending data to adapter");
+                                    List<Shot> results = listResponse.body();
+                                    getViewState().hideLoadingPb();
+                                    getViewState().addAll(results);
+                                    getViewState().addLoadingFooter();
+                                } else {
+                                    getViewState().removeLoadingFooter();
+                                    getViewState().isLoading(false);
+
+                                    List<Shot> results = listResponse.body();
+                                    getViewState().addAll(results);
+
+                                    getViewState().addLoadingFooter();
+                                }
+                            }
+                        },
+                        throwable -> {
+                            throwable.printStackTrace();
+                            Log.d(TAG, "--Shots request was failed");
+                        }
+                );
+    }
 
 
 

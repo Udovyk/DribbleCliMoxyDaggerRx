@@ -1,4 +1,3 @@
-/*
 package udovyk.dribbleclimoxydaggerrx.ui.adapters;
 
 
@@ -37,14 +36,12 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private List<Shot> shotsList;
     private Context context;
-    private Fragment parentFragment;
     private boolean isLoadingAdded = false;
 
 
-    public ShotsAdapter(Context context, Fragment parentFragment) {
+    public ShotsAdapter(Context context) {
         this.context = context;
         shotsList = new ArrayList<>();
-        this.parentFragment = parentFragment;
     }
 
 
@@ -114,8 +111,8 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
 
                 //set on click listeners
-                shotsVH.cardViewShots.setOnClickListener(getOnClickListener(shot));
-                shotsVH.imShotItem.setOnClickListener(getOnClickListener(shot));
+                //shotsVH.cardViewShots.setOnClickListener(getOnClickListener(shot));
+                //shotsVH.imShotItem.setOnClickListener(getOnClickListener(shot));
 
                 break;
             case LOADING:
@@ -126,7 +123,7 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-    private View.OnClickListener getOnClickListener(Shot shot) {
+    /*private View.OnClickListener getOnClickListener(Shot shot) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +133,7 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     setDataToBundle(bundle, shot);
                     shotDetailFragment.setArguments(bundle);
 
-                    parentFragment.getFragmentManager()
+                    context.getFragmentManager()
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
                             .add(R.id.shots_frag, shotDetailFragment, ShotDetailFragment.TAG)
@@ -145,7 +142,7 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
             }
         };
-    }
+    }*/
 
     @Override
     public int getItemCount() {
@@ -157,11 +154,6 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return (position == shotsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
     }
 
-
-    */
-/*
-    * Helpers
-    * *//*
 
     public void add(Shot shot) {
         shotsList.add(shot);
@@ -227,12 +219,6 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    */
-/*
-    * View Holders_________________________________________________________________________________________________________________________
-    * *//*
-
-
     protected class ShotsVH extends RecyclerView.ViewHolder {
 
         CardView cardViewShots;
@@ -240,7 +226,6 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         TextView tvShotTitle;
         TextView tvShotAutor;
         TextView tvShotDate;
-
 
         ShotsVH(View viewItem) {
             super(viewItem);
@@ -262,4 +247,3 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 }
-*/

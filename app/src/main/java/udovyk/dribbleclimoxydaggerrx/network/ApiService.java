@@ -48,19 +48,19 @@ public interface ApiService {
      * Get shots
      */
     @GET("shots")
-    Observable<List<Shot>> fetchShots();
+    Observable<Response<List<Shot>>> fetchShots();
 
     @GET("shots/:id")
-    Observable<Shot> fetchShot(@Query("id") int id);
+    Observable<Response<Shot>> fetchShot(@Query("id") int id);
 
     @GET("shots")
-    Observable<List<Shot>> fetchShotsPerPage(@Query("page") int page, @Query("per_page") int perPage);
+    Observable<Response<List<Shot>>> fetchShotsPerPage(@Query("page") int page, @Query("per_page") int perPage);
 
     @GET("shots")
-    Observable<List<Shot>> fetchShotsPerPage(@Query("page") int page);
+    Observable<Response<List<Shot>>> fetchShotsPerPage(@Query("page") int page);
 
     @GET("shots")
-    Observable<List<Shot>> fetchShotsPerPageSort(@Query("page") int page, @Query("per_page") int perPage, @Query("list") String list, @Query("sort") String sort);
+    Observable<Response<List<Shot>>> fetchShotsPerPageSort(@Query("page") int page, @Query("per_page") int perPage, @Query("list") String list, @Query("sort") String sort);
 
     /*
     * Get authenticated user
@@ -72,7 +72,7 @@ public interface ApiService {
     * Get attachments
     * */
     @GET("shots/{id}/attachments")
-    Observable<List<Attachment>> getShotAttachments(@Path("id") long shotId);
+    Observable<Response<List<Attachment>>> getShotAttachments(@Path("id") long shotId);
 
 
 

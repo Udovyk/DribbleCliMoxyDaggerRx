@@ -40,13 +40,13 @@ public class ApiManager {
                 .compose(applyTransformers());
     }
 
-    public Observable<List<Shot>> callForShots(int currentPage, String sortValue) {
+    public Observable<Response<List<Shot>>> callForShots(int currentPage, String sortValue) {
         return apiService
                 .fetchShotsPerPageSort(currentPage, ShotsRequestConstants.PER_PAGE, ShotsRequestConstants.LIST_BY_DEFAULT, sortValue)
                 .compose(applyTransformers());
     }
 
-    public Observable<List<Attachment>> callForShotsAttachmetns(int idOfShot) {
+    public Observable<Response<List<Attachment>>> callForShotsAttachmetns(int idOfShot) {
         return apiService
                 .getShotAttachments(idOfShot)
                 .compose(applyTransformers());

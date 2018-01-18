@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:host="callback3"
-                    android:scheme="sergapp3" />
+                    android:host="callback"
+                    android:scheme="dribbbleclimvp" />
             </intent-filter>
         </activity>
     </application>
