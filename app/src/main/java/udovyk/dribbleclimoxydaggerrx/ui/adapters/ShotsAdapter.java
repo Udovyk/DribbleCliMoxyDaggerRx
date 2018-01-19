@@ -7,12 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -25,37 +27,41 @@ import java.util.TimeZone;
 
 import udovyk.dribbleclimoxydaggerrx.R;
 import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
+import udovyk.dribbleclimoxydaggerrx.di.qualifiers.ActivityContext;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
+import udovyk.dribbleclimoxydaggerrx.ui.view.ShotItemView;
 
 
-public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ShotsAdapter extends BaseAdapter<Shot, ShotItemView, BaseViewHolder<ShotItemView>> {
 
     private static final String TAG = "ShotsAdapter";
     public static final int ITEM = 0;
     public static final int LOADING = 1;
 
-    private List<Shot> shotsList;
+    private ItemClickListener itemClickListener;
     private Context context;
     private boolean isLoadingAdded = false;
 
 
     public ShotsAdapter(Context context) {
         this.context = context;
-        shotsList = new ArrayList<>();
     }
 
 
-    public List<Shot> getShotsList() {
+    /*public List<Shot> getShotsList() {
         return shotsList;
-    }
+    }*/
 
-    public void setShotsList(List<Shot> shotsList) {
+    /*public void setShotsList(List<Shot> shotsList) {
         this.shotsList = shotsList;
-    }
+    }*/
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder viewHolder = null;
+    public BaseViewHolder<ShotItemView> onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        return new BaseViewHolder<>(new ShotItemView(context));
+
+        /*RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         switch (viewType) {
@@ -67,21 +73,23 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 viewHolder = new LoadingVH(v2);
                 break;
         }
-        return viewHolder;
+        return viewHolder;*/
+
+
     }
 
-    @NonNull
+   /* @NonNull
     public RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
         RecyclerView.ViewHolder viewHolder;
         View v1 = inflater.inflate(R.layout.shots_item, parent, false);
         viewHolder = new ShotsVH(v1);
         return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        final Shot shot = shotsList.get(position);
+    }*/
+       @Override
+    public void onBindViewHolder(BaseViewHolder<ShotItemView> holder, int position) {
+           super.onBindViewHolder(holder, position);
+           holder.getView().setClickListener(itemClickListener);
+        /*final Shot shot = shotsList.get(position);
 
 
         switch (getItemViewType(position)) {
@@ -110,7 +118,6 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     e.printStackTrace();
                 }
 
-                //set on click listeners
                 //shotsVH.cardViewShots.setOnClickListener(getOnClickListener(shot));
                 //shotsVH.imShotItem.setOnClickListener(getOnClickListener(shot));
 
@@ -118,7 +125,7 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case LOADING:
                 // Do nothing
                 break;
-        }
+        }*/
 
 
     }
@@ -146,16 +153,16 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return shotsList == null ? 0 : shotsList.size();
+        return mContent == null ? 0 : mContent.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return (position == shotsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+        return (position == mContent.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
     }
 
 
-    public void add(Shot shot) {
+    /*public void add(Shot shot) {
         shotsList.add(shot);
         notifyItemInserted(shotsList.size() - 1);
     }
@@ -187,27 +194,27 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public Shot getItem(int position) {
         return shotsList.get(position);
-    }
+    }*/
 
     public void addLoadingFooter() {
         isLoadingAdded = true;
-        add(new Shot());
+        addData(new Shot());
     }
 
     public void removeLoadingFooter() {
         isLoadingAdded = false;
 
-        int position = shotsList.size() - 1;
-        Shot shot = getItem(position);
+        int position = mContent.size() - 1;
+        Shot shot = getData(position);
 
         if (shot != null) {
-            shotsList.remove(position);
+            mContent.remove(position);
             notifyItemRemoved(position);
         }
     }
 
 
-    private void setDataToBundle(Bundle bundle, Shot shot) {
+   /* private void setDataToBundle(Bundle bundle, Shot shot) {
         bundle.putString(ShotDetailConstants.TITLE, shot.getTitle());
         bundle.putString(ShotDetailConstants.DESCRIPTION, shot.getDescription());
 
@@ -216,10 +223,13 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         bundle.putInt(ShotDetailConstants.VIEWS_COUNT, shot.getViewsCount());
         bundle.putInt(ShotDetailConstants.COMMENTS_COUNT, shot.getCommentsCount());
         bundle.putInt(ShotDetailConstants.ID, shot.getId());
+    }*/
+
+    public void setOnClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
-
-    protected class ShotsVH extends RecyclerView.ViewHolder {
+    /*protected class ShotsVH extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         CardView cardViewShots;
         ImageView imShotItem;
@@ -230,14 +240,21 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ShotsVH(View viewItem) {
             super(viewItem);
 
+
             cardViewShots = viewItem.findViewById(R.id.cvShot);
             imShotItem = viewItem.findViewById(R.id.imShotItem);
             tvShotTitle = viewItem.findViewById(R.id.tvShotTitle);
             tvShotAutor = viewItem.findViewById(R.id.tvShotAutor);
             tvShotDate = viewItem.findViewById(R.id.tvShotDate);
 
+            cardViewShots.setOnClickListener(this);
+            imShotItem.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(context, "item was clicked", Toast.LENGTH_SHORT).show();
+        }
     }
 
     protected class LoadingVH extends RecyclerView.ViewHolder {
@@ -245,5 +262,5 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public LoadingVH(View itemView) {
             super(itemView);
         }
-    }
+    }*/
 }

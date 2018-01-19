@@ -26,11 +26,15 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import ru.terrakok.cicerone.Router;
 import udovyk.dribbleclimoxydaggerrx.R;
+import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
 import udovyk.dribbleclimoxydaggerrx.common.ShotsRequestConstants;
 import udovyk.dribbleclimoxydaggerrx.mvp.presenter.ShotsPresenter;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotsView;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
+import udovyk.dribbleclimoxydaggerrx.ui.adapters.ItemClickListener;
 import udovyk.dribbleclimoxydaggerrx.ui.adapters.ShotsAdapter;
 import udovyk.dribbleclimoxydaggerrx.ui.utils.GridSpacingItemDecoration;
 import udovyk.dribbleclimoxydaggerrx.ui.utils.PaginationScrollListener;
@@ -41,17 +45,24 @@ import udovyk.dribbleclimoxydaggerrx.ui.utils.PaginationScrollListener;
 
 public class ShotsFragment extends BaseFragment implements ShotsView {
 
+    //region di
     @InjectPresenter
     ShotsPresenter presenter;
     @Inject
     ShotsAdapter adapter;
+    @Inject
+    Router router;
+    //endregion di
 
+
+    //region views
     @BindView(R.id.toolbar_shots)
     Toolbar mToolbar;
     @BindView(R.id.rvShotsList)
     RecyclerView rvShotsList;
     @BindView(R.id.pbShots)
     ProgressBar pbShots;
+    //endregion
 
     private int currentPage = ShotsRequestConstants.PAGE_START;
     private boolean isLoading = false;
@@ -98,6 +109,15 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         rvShotsList.setLayoutManager(mLayoutManager);
         rvShotsList.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         rvShotsList.setItemAnimator(new DefaultItemAnimator());
+
+
+        adapter.setOnClickListener(new ItemClickListener() {
+            @Override
+            public void onClick() {
+                presenter.onItemClick();
+            }
+        });
+
         rvShotsList.setAdapter(adapter);
 
         //if RV was scrolled
@@ -128,8 +148,6 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         return v;
     }
 
-
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -150,7 +168,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
             //make sort by populariry
             case R.id.sort_popular:
                 sortValue = ShotsRequestConstants.SORT_BY_POPULARITY;
-                adapter.getShotsList().clear();
+                adapter.getData().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
                 presenter.loadShotsPage(currentPage, sortValue);
@@ -159,7 +177,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
             //make sort by views
             case R.id.sort_most_viewed:
                 sortValue = ShotsRequestConstants.SORT_BY_VIEWS;
-                adapter.getShotsList().clear();
+                adapter.getData().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
                 presenter.loadShotsPage(currentPage, sortValue);
@@ -168,7 +186,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
             //make sort by comments
             case R.id.sort_most_commented:
                 sortValue= ShotsRequestConstants.SORT_BY_COMMENTS;
-                adapter.getShotsList().clear();
+                adapter.getData().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
                 presenter.loadShotsPage(currentPage, sortValue);
@@ -177,7 +195,6 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void showLoadingPb() {
@@ -191,7 +208,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
     @Override
     public void addAll(List<Shot> list) {
-        adapter.addAll(list);
+        adapter.addData(list);
     }
 
     @Override
@@ -229,4 +246,22 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     public void injectDependencies() {
         getFragmentComponent().inject(this);
     }
+
+    /*public Bundle getFullBundle(int position) {
+        Shot shot = adapter.getItem(position);
+        Bundle bundle = new Bundle();
+
+        bundle.putString(ShotDetailConstants.TITLE, shot.getTitle());
+        bundle.putString(ShotDetailConstants.DESCRIPTION, shot.getDescription());
+
+        bundle.putString(ShotDetailConstants.IMAGE_URL, shot.getImages().getNormal());
+        bundle.putInt(ShotDetailConstants.LIKES_COUNT, shot.getLikesCount());
+        bundle.putInt(ShotDetailConstants.VIEWS_COUNT, shot.getViewsCount());
+        bundle.putInt(ShotDetailConstants.COMMENTS_COUNT, shot.getCommentsCount());
+        bundle.putInt(ShotDetailConstants.ID, shot.getId());
+
+        return bundle;
+    }*/
+
+
 }

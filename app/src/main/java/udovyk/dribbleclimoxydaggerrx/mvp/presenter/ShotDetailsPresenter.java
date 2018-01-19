@@ -15,6 +15,8 @@ import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotDetailView;
 public class ShotDetailsPresenter extends BasePresenter<ShotDetailView>{
     private static String TAG = "ShotDetailFragmentPresenter";
 
+
+
     public ShotDetailsPresenter() {
         App.getApplicationComponent().inject(this);
     }

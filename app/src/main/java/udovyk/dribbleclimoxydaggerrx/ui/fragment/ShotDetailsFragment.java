@@ -26,8 +26,10 @@ import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotDetailView;
 public class ShotDetailsFragment extends BaseFragment implements ShotDetailView {
     public static final String TAG = "ShotDetailFragment";
 
+    //region di
     @InjectPresenter
     ShotDetailsPresenter presenter;
+    //endregion
 
     //region views
     @BindView(R.id.shot_detail_image)
@@ -45,6 +47,13 @@ public class ShotDetailsFragment extends BaseFragment implements ShotDetailView 
     //endregion
 
     Bundle bundle;
+
+    public static ShotDetailsFragment newInstance() {
+        ShotDetailsFragment fragment = new ShotDetailsFragment();
+        /*Bundle args = new Bundle();
+        fragment.setArguments(args)*/;
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

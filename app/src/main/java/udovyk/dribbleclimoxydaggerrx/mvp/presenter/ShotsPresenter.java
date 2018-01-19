@@ -1,5 +1,6 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Router;
 import udovyk.dribbleclimoxydaggerrx.App;
+import udovyk.dribbleclimoxydaggerrx.Screens;
 import udovyk.dribbleclimoxydaggerrx.manager.ApiManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotsView;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
@@ -23,8 +25,8 @@ import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
 public class ShotsPresenter extends BasePresenter<ShotsView> {
     private static String TAG = "ShotsPresenter";
 
-    /*@Inject
-    Router router;*/
+    @Inject
+    Router router;
     @Inject
     ApiManager apiManager;
 
@@ -41,7 +43,6 @@ public class ShotsPresenter extends BasePresenter<ShotsView> {
                 .subscribe(
                         listResponse -> {
                             if (listResponse.isSuccessful()) {
-                                Log.d(TAG, "--Sending data to adapter");
                                 if (currentPage == 1) {
                                     Log.d(TAG, "--Sending data to adapter");
                                     List<Shot> results = listResponse.body();
@@ -64,6 +65,11 @@ public class ShotsPresenter extends BasePresenter<ShotsView> {
                             Log.d(TAG, "--Shots request was failed");
                         }
                 );
+    }
+
+    public void onItemClick() {
+        router.replaceScreen(Screens.SHOT_DETAILS_FRAGMENT_SCREEN);
+        //router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN, bundle);
     }
 
 

@@ -9,7 +9,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.terrakok.cicerone.Navigator;
-import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.R;
 import udovyk.dribbleclimoxydaggerrx.Screens;
@@ -17,6 +16,7 @@ import udovyk.dribbleclimoxydaggerrx.di.components.ActivityComponent;
 import udovyk.dribbleclimoxydaggerrx.di.components.ApplicationComponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ActivityModule;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.BaseMvpView;
+import udovyk.dribbleclimoxydaggerrx.navigation.SupportFragmentNavigator;
 import udovyk.dribbleclimoxydaggerrx.ui.fragment.ShotAttachmentsFragment;
 import udovyk.dribbleclimoxydaggerrx.ui.fragment.ShotDetailsFragment;
 import udovyk.dribbleclimoxydaggerrx.ui.fragment.ShotsFragment;
@@ -30,7 +30,7 @@ import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
 
 public abstract class BaseActivity extends MvpAppCompatActivity implements BaseMvpView, ToolbarActions {
 
-    protected Navigator baseNavigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.activity_home_fragment_container) {
+    protected Navigator baseNavigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.activity_home_fragment_container, R.anim.fade_in) {
 
         @Override
         protected Fragment createFragment(String screenKey, Object data) {
@@ -42,7 +42,9 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
                 case Screens.SHOTS_FRAGMENT_SCREEN:
                     return ShotsFragment.newInstance();
                 case Screens.SHOT_DETAILS_FRAGMENT_SCREEN:
-                   // return ShotDetailsFragment.newInstance();
+                    ShotDetailsFragment detailsFragment = ShotDetailsFragment.newInstance();
+                    //pass data
+                    return detailsFragment;
                 case Screens.SHOT_ATTACHMENTS_FRAGMENT_SCREEN:
                     //return ShotAttachmentsFragment.newInstance();
             }
