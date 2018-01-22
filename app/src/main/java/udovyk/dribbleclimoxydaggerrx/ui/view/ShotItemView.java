@@ -1,7 +1,12 @@
 package udovyk.dribbleclimoxydaggerrx.ui.view;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,7 +34,6 @@ import udovyk.dribbleclimoxydaggerrx.ui.adapters.ItemClickListener;
 
 public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
     private static final String TAG = "ShotItemView";
-    Shot mData;
     ItemClickListener itemClickListener;
 
     @BindView(R.id.imShotItem)
@@ -46,19 +50,34 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
         init(context);
     }
 
+    public ShotItemView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    public ShotItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ShotItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
+    }
+
     private void init(Context context) {
-        View view = inflate(getContext(), R.layout.shots_item, (ViewGroup) getRootView());
-        //LayoutInflater.from(context).inflate(R.layout.shots_item, this);
-        ButterKnife.bind(view);
+        //View view = inflate(getContext(), R.layout.shots_item, (ViewGroup) getRootView());
+        LayoutInflater.from(context).inflate(R.layout.shots_item, this);
+        ButterKnife.bind(this);
     }
 
     @Override
-    public void setData(Shot data) {
-        if (data == null) {
+    public void setData(Shot mData) {
+        if (mData == null) {
             return;
         }
 
-        mData = data;
         Log.d(TAG, mData.getDescription() + "-------");
         Picasso.with(getContext())
                 .load(mData.getImages().getNormal())
@@ -85,6 +104,12 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
     public void onClick() {
         itemClickListener.onClick();
     }
+    @OnClick(R.id.imShotItem)
+    public void onClick1() {
+        itemClickListener.onClick();
+    }
+
+
 
     public void setClickListener(ItemClickListener clickListener) {
         this.itemClickListener = clickListener;

@@ -2,167 +2,89 @@ package udovyk.dribbleclimoxydaggerrx.ui.adapters;
 
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
+
+import javax.inject.Inject;
 
 import udovyk.dribbleclimoxydaggerrx.R;
-import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
-import udovyk.dribbleclimoxydaggerrx.di.qualifiers.ActivityContext;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
 import udovyk.dribbleclimoxydaggerrx.ui.view.ShotItemView;
 
 
-public class ShotsAdapter extends BaseAdapter<Shot, ShotItemView, BaseViewHolder<ShotItemView>> {
+public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final String TAG = "ShotsAdapter";
     public static final int ITEM = 0;
     public static final int LOADING = 1;
 
-    private ItemClickListener itemClickListener;
+    private List<Shot> shotsList;
     private Context context;
     private boolean isLoadingAdded = false;
 
+    private ItemClickListener mItemClickListener;
 
+
+    @Inject
     public ShotsAdapter(Context context) {
         this.context = context;
+        shotsList = new ArrayList<>();
     }
 
-
-    /*public List<Shot> getShotsList() {
-        return shotsList;
-    }*/
-
-    /*public void setShotsList(List<Shot> shotsList) {
-        this.shotsList = shotsList;
-    }*/
-
     @Override
-    public BaseViewHolder<ShotItemView> onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return new BaseViewHolder<>(new ShotItemView(context));
-
-        /*RecyclerView.ViewHolder viewHolder = null;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         switch (viewType) {
             case ITEM:
-                viewHolder = getViewHolder(parent, inflater);
+                viewHolder = new ShotsVH(new ShotItemView(context));
                 break;
             case LOADING:
                 View v2 = inflater.inflate(R.layout.item_progress, parent, false);
                 viewHolder = new LoadingVH(v2);
                 break;
         }
-        return viewHolder;*/
-
-
+        return viewHolder;
     }
 
-   /* @NonNull
-    public RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
-        RecyclerView.ViewHolder viewHolder;
-        View v1 = inflater.inflate(R.layout.shots_item, parent, false);
-        viewHolder = new ShotsVH(v1);
-        return viewHolder;
-    }*/
-       @Override
-    public void onBindViewHolder(BaseViewHolder<ShotItemView> holder, int position) {
-           super.onBindViewHolder(holder, position);
-           holder.getView().setClickListener(itemClickListener);
-        /*final Shot shot = shotsList.get(position);
-
-
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case ITEM:
-                final ShotsVH shotsVH = (ShotsVH) holder;
-
-                Picasso.with(context)
-                        .load(shot.getImages().getNormal())
-                        .into(shotsVH.imShotItem);
-                shotsVH.tvShotTitle.setText(shot.getTitle());
-                shotsVH.tvShotAutor.setText(shot.getUser().getName());
-
-                String dateRaw = shot.getCreatedAt();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                SimpleDateFormat sdfF = new SimpleDateFormat("dd-MM-yyyy");
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                Date date;
-                try {
-
-                    date = sdf.parse(dateRaw);
-                    String finalFormatedDate = sdfF.format(date);
-                    Log.d(TAG, "onBindViewHolder: date = " + finalFormatedDate);
-                    shotsVH.tvShotDate.setText(finalFormatedDate);
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                //shotsVH.cardViewShots.setOnClickListener(getOnClickListener(shot));
-                //shotsVH.imShotItem.setOnClickListener(getOnClickListener(shot));
-
+                ShotsVH shotsVH = (ShotsVH) holder;
+                shotsVH.setData(shotsList.get(position));
                 break;
             case LOADING:
-                // Do nothing
                 break;
-        }*/
-
+        }
 
     }
 
-    /*private View.OnClickListener getOnClickListener(Shot shot) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (parentFragment.getFragmentManager().findFragmentByTag(ShotDetailFragment.TAG) == null) {
-                    ShotDetailFragment shotDetailFragment = new ShotDetailFragment();
-                    Bundle bundle = new Bundle();
-                    setDataToBundle(bundle, shot);
-                    shotDetailFragment.setArguments(bundle);
+    public List<Shot> getShotsList() {
+        return shotsList;
+    }
 
-                    context.getFragmentManager()
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                            .add(R.id.shots_frag, shotDetailFragment, ShotDetailFragment.TAG)
-                            .addToBackStack(null)
-                            .commit();
-                }
-            }
-        };
-    }*/
+    public void setShotsList(List<Shot> shotsList) {
+        this.shotsList = shotsList;
+    }
+
 
     @Override
     public int getItemCount() {
-        return mContent == null ? 0 : mContent.size();
+        return shotsList == null ? 0 : shotsList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return (position == mContent.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+        return (position == shotsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
     }
 
-
-    /*public void add(Shot shot) {
+    public void add(Shot shot) {
         shotsList.add(shot);
         notifyItemInserted(shotsList.size() - 1);
     }
@@ -194,73 +116,51 @@ public class ShotsAdapter extends BaseAdapter<Shot, ShotItemView, BaseViewHolder
 
     public Shot getItem(int position) {
         return shotsList.get(position);
-    }*/
+    }
 
     public void addLoadingFooter() {
         isLoadingAdded = true;
-        addData(new Shot());
+        add(new Shot());
     }
 
     public void removeLoadingFooter() {
         isLoadingAdded = false;
 
-        int position = mContent.size() - 1;
-        Shot shot = getData(position);
+        int position = shotsList.size() - 1;
+        Shot shot = getItem(position);
 
         if (shot != null) {
-            mContent.remove(position);
+            shotsList.remove(position);
             notifyItemRemoved(position);
         }
     }
 
-
-   /* private void setDataToBundle(Bundle bundle, Shot shot) {
-        bundle.putString(ShotDetailConstants.TITLE, shot.getTitle());
-        bundle.putString(ShotDetailConstants.DESCRIPTION, shot.getDescription());
-
-        bundle.putString(ShotDetailConstants.IMAGE_URL, shot.getImages().getNormal());
-        bundle.putInt(ShotDetailConstants.LIKES_COUNT, shot.getLikesCount());
-        bundle.putInt(ShotDetailConstants.VIEWS_COUNT, shot.getViewsCount());
-        bundle.putInt(ShotDetailConstants.COMMENTS_COUNT, shot.getCommentsCount());
-        bundle.putInt(ShotDetailConstants.ID, shot.getId());
-    }*/
-
     public void setOnClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+        mItemClickListener = itemClickListener;
     }
 
-    /*protected class ShotsVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+    protected class ShotsVH extends RecyclerView.ViewHolder {
+        ShotItemView shotItemView;
 
-        CardView cardViewShots;
-        ImageView imShotItem;
-        TextView tvShotTitle;
-        TextView tvShotAutor;
-        TextView tvShotDate;
-
-        ShotsVH(View viewItem) {
+        ShotsVH(ShotItemView viewItem) {
             super(viewItem);
-
-
-            cardViewShots = viewItem.findViewById(R.id.cvShot);
-            imShotItem = viewItem.findViewById(R.id.imShotItem);
-            tvShotTitle = viewItem.findViewById(R.id.tvShotTitle);
-            tvShotAutor = viewItem.findViewById(R.id.tvShotAutor);
-            tvShotDate = viewItem.findViewById(R.id.tvShotDate);
-
-            cardViewShots.setOnClickListener(this);
-            imShotItem.setOnClickListener(this);
+            shotItemView = viewItem;
+            shotItemView.setClickListener(mItemClickListener);
         }
 
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(context, "item was clicked", Toast.LENGTH_SHORT).show();
+        void setData(Shot data) {
+            shotItemView.setData(data);
         }
+
     }
 
     protected class LoadingVH extends RecyclerView.ViewHolder {
 
         public LoadingVH(View itemView) {
             super(itemView);
+
         }
-    }*/
+    }
+
+
 }

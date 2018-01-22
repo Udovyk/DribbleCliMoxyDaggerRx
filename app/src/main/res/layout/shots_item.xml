@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/cardview_light_background"
     android:orientation="horizontal">
 
@@ -27,7 +27,6 @@
                 android:id="@+id/imShotItem"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/shot_cover_height"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher" />

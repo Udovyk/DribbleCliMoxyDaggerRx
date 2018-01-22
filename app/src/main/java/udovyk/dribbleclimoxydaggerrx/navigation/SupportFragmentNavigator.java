@@ -55,7 +55,7 @@ public abstract class SupportFragmentNavigator implements Navigator {
         if (command instanceof Forward) {
             Forward forward = (Forward) command;
             transaction.replace(containerId, createFragment(forward.getScreenKey(), forward.getTransitionData()))
-                    .addToBackStack(forward.getScreenKey())
+                    .addToBackStack(null)
                     .commit();
         } else if (command instanceof Back) {
             if (fragmentManager.getBackStackEntryCount() > 0) {

@@ -56,7 +56,7 @@ public class ShotsPresenter extends BasePresenter<ShotsView> {
                                     List<Shot> results = listResponse.body();
                                     getViewState().addAll(results);
 
-                                    getViewState().addLoadingFooter();
+                                   getViewState().addLoadingFooter();
                                 }
                             }
                         },
@@ -68,7 +68,7 @@ public class ShotsPresenter extends BasePresenter<ShotsView> {
     }
 
     public void onItemClick() {
-        router.replaceScreen(Screens.SHOT_DETAILS_FRAGMENT_SCREEN);
+        router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN);
         //router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN, bundle);
     }
 

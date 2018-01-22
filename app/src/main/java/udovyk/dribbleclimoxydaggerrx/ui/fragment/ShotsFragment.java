@@ -80,7 +80,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -120,14 +120,12 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
         rvShotsList.setAdapter(adapter);
 
-        //if RV was scrolled
         rvShotsList.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
             @Override
             protected void loadMoreItems() {
                 isLoading = true;
                 currentPage += 1;
 
-                // mocking network delay for API call
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -168,7 +166,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
             //make sort by populariry
             case R.id.sort_popular:
                 sortValue = ShotsRequestConstants.SORT_BY_POPULARITY;
-                adapter.getData().clear();
+                adapter.getShotsList().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
                 presenter.loadShotsPage(currentPage, sortValue);
@@ -177,7 +175,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
             //make sort by views
             case R.id.sort_most_viewed:
                 sortValue = ShotsRequestConstants.SORT_BY_VIEWS;
-                adapter.getData().clear();
+                adapter.getShotsList().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
                 presenter.loadShotsPage(currentPage, sortValue);
@@ -186,7 +184,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
             //make sort by comments
             case R.id.sort_most_commented:
                 sortValue= ShotsRequestConstants.SORT_BY_COMMENTS;
-                adapter.getData().clear();
+                adapter.getShotsList().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
                 presenter.loadShotsPage(currentPage, sortValue);
@@ -208,7 +206,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
     @Override
     public void addAll(List<Shot> list) {
-        adapter.addData(list);
+        adapter.addAll(list);
     }
 
     @Override
