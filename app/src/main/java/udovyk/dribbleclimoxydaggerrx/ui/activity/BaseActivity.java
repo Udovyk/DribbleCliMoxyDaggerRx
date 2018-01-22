@@ -30,7 +30,7 @@ import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
 
 public abstract class BaseActivity extends MvpAppCompatActivity implements BaseMvpView, ToolbarActions {
 
-    protected Navigator baseNavigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.activity_home_fragment_container, R.anim.fade_in) {
+    protected Navigator baseNavigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.activity_home_fragment_container, R.anim.enter_from_right) {
 
         @Override
         protected Fragment createFragment(String screenKey, Object data) {

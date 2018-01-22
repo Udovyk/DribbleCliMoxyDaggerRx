@@ -8,5 +8,5 @@ import android.os.Bundle;
 
 public interface ItemClickListener {
     //void onClick(int position, Bundle bundle);
-    void onClick();
+    void onClick(int position);
 }

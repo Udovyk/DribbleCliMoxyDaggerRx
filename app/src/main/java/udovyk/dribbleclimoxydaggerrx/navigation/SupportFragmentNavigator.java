@@ -26,6 +26,7 @@ public abstract class SupportFragmentNavigator implements Navigator {
     private int inAnim;
     private int outAnim;
 
+
     public SupportFragmentNavigator(FragmentManager fragmentManager, int containerId, @AnimationType int animationId) {
         this.fragmentManager = fragmentManager;
         this.containerId = containerId;
@@ -39,8 +40,8 @@ public abstract class SupportFragmentNavigator implements Navigator {
                 outAnim = NO_ANIM;
                 break;
             case FADE_ANIM:
-                inAnim = R.anim.fade_in;
-                outAnim = R.anim.fade_out;
+                inAnim = R.anim.enter_from_right;
+                outAnim = R.anim.exit_to_left;
                 break;
         }
     }
@@ -54,8 +55,8 @@ public abstract class SupportFragmentNavigator implements Navigator {
 
         if (command instanceof Forward) {
             Forward forward = (Forward) command;
-            transaction.replace(containerId, createFragment(forward.getScreenKey(), forward.getTransitionData()))
-                    .addToBackStack(null)
+            transaction.add(containerId, createFragment(forward.getScreenKey(), forward.getTransitionData()))
+                    .addToBackStack(forward.getScreenKey())
                     .commit();
         } else if (command instanceof Back) {
             if (fragmentManager.getBackStackEntryCount() > 0) {
@@ -67,7 +68,7 @@ public abstract class SupportFragmentNavigator implements Navigator {
             Replace replace = (Replace) command;
             if (fragmentManager.getBackStackEntryCount() > 0) {
                 fragmentManager.popBackStackImmediate();
-                transaction.replace(containerId, createFragment(replace.getScreenKey(), replace.getTransitionData()))
+                transaction.add(containerId, createFragment(replace.getScreenKey(), replace.getTransitionData()))
                         .addToBackStack(replace.getScreenKey())
                         .commit();
             } else {

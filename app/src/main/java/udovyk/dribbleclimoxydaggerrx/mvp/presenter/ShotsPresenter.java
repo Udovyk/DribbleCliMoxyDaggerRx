@@ -67,9 +67,9 @@ public class ShotsPresenter extends BasePresenter<ShotsView> {
                 );
     }
 
-    public void onItemClick() {
-        router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN);
-        //router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN, bundle);
+    public void onItemClick(Bundle bundle) {
+        //router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN);
+        router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN, bundle);
     }
 
 

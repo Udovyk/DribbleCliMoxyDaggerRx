@@ -1,5 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.view;
 
+import android.os.Bundle;
+
 import java.util.List;
 
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
@@ -9,6 +11,8 @@ import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
  */
 
 public interface ShotsView extends BaseMvpView {
+
+    Bundle getBundle(int position);
 
     void showLoadingPb();
 

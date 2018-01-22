@@ -35,6 +35,7 @@ import udovyk.dribbleclimoxydaggerrx.ui.adapters.ItemClickListener;
 public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
     private static final String TAG = "ShotItemView";
     ItemClickListener itemClickListener;
+    private int position;
 
     @BindView(R.id.imShotItem)
     ImageView imShotItem;
@@ -49,7 +50,6 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
         super(context);
         init(context);
     }
-
     public ShotItemView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
@@ -102,11 +102,15 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
 
     @OnClick(R.id.cvShot)
     public void onClick() {
-        itemClickListener.onClick();
+        itemClickListener.onClick(position);
     }
     @OnClick(R.id.imShotItem)
     public void onClick1() {
-        itemClickListener.onClick();
+        itemClickListener.onClick(position);
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
 

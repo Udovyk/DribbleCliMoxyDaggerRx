@@ -44,7 +44,7 @@ import udovyk.dribbleclimoxydaggerrx.ui.utils.PaginationScrollListener;
  */
 
 public class ShotsFragment extends BaseFragment implements ShotsView {
-
+    public static final String TAG = "ShotsFragment";
     //region di
     @InjectPresenter
     ShotsPresenter presenter;
@@ -53,7 +53,6 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     @Inject
     Router router;
     //endregion di
-
 
     //region views
     @BindView(R.id.toolbar_shots)
@@ -110,11 +109,10 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         rvShotsList.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         rvShotsList.setItemAnimator(new DefaultItemAnimator());
 
-
         adapter.setOnClickListener(new ItemClickListener() {
             @Override
-            public void onClick() {
-                presenter.onItemClick();
+            public void onClick(int position) {
+                presenter.onItemClick(getBundle(position));
             }
         });
 
@@ -245,7 +243,8 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         getFragmentComponent().inject(this);
     }
 
-    /*public Bundle getFullBundle(int position) {
+    @Override
+    public Bundle getBundle(int position) {
         Shot shot = adapter.getItem(position);
         Bundle bundle = new Bundle();
 
@@ -259,7 +258,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         bundle.putInt(ShotDetailConstants.ID, shot.getId());
 
         return bundle;
-    }*/
+    }
 
 
 }
