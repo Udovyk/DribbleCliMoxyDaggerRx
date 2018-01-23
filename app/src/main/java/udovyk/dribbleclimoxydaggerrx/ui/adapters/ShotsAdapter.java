@@ -61,6 +61,7 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case ITEM:
                 ShotsVH shotsVH = (ShotsVH) holder;
                 shotsVH.setData(shotsList.get(position));
+
                 break;
             case LOADING:
                 break;
@@ -149,10 +150,7 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ShotsVH(ShotItemView viewItem) {
             super(viewItem);
             shotItemView = viewItem;
-            shotItemView.setPosition(getLayoutPosition());
             shotItemView.setClickListener(mItemClickListener);
-
-
         }
 
         void setData(Shot data) {
@@ -168,6 +166,10 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         }
     }
+
+
+
+
 
 
 }

@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import ru.terrakok.cicerone.Router;
 import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.Screens;
+import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
 import udovyk.dribbleclimoxydaggerrx.manager.ApiManager;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotsView;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
@@ -68,7 +69,7 @@ public class ShotsPresenter extends BasePresenter<ShotsView> {
     }
 
     public void onItemClick(Bundle bundle) {
-        //router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN);
+        Log.d(TAG, "-----" + bundle.getString(ShotDetailConstants.TITLE));
         router.navigateTo(Screens.SHOT_DETAILS_FRAGMENT_SCREEN, bundle);
     }
 

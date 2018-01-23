@@ -111,12 +111,13 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
         adapter.setOnClickListener(new ItemClickListener() {
             @Override
-            public void onClick(int position) {
-                presenter.onItemClick(getBundle(position));
+            public void onClick(Bundle bundle) {
+                presenter.onItemClick(bundle);
             }
         });
 
         rvShotsList.setAdapter(adapter);
+
 
         rvShotsList.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
             @Override
@@ -143,6 +144,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
         return v;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -181,7 +183,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
             //make sort by comments
             case R.id.sort_most_commented:
-                sortValue= ShotsRequestConstants.SORT_BY_COMMENTS;
+                sortValue = ShotsRequestConstants.SORT_BY_COMMENTS;
                 adapter.getShotsList().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
@@ -241,23 +243,6 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     @Override
     public void injectDependencies() {
         getFragmentComponent().inject(this);
-    }
-
-    @Override
-    public Bundle getBundle(int position) {
-        Shot shot = adapter.getItem(position);
-        Bundle bundle = new Bundle();
-
-        bundle.putString(ShotDetailConstants.TITLE, shot.getTitle());
-        bundle.putString(ShotDetailConstants.DESCRIPTION, shot.getDescription());
-
-        bundle.putString(ShotDetailConstants.IMAGE_URL, shot.getImages().getNormal());
-        bundle.putInt(ShotDetailConstants.LIKES_COUNT, shot.getLikesCount());
-        bundle.putInt(ShotDetailConstants.VIEWS_COUNT, shot.getViewsCount());
-        bundle.putInt(ShotDetailConstants.COMMENTS_COUNT, shot.getCommentsCount());
-        bundle.putInt(ShotDetailConstants.ID, shot.getId());
-
-        return bundle;
     }
 
 

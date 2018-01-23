@@ -5,5 +5,6 @@ package udovyk.dribbleclimoxydaggerrx.mvp.view;
  */
 
 public interface ViewModel<T> {
+
     void setData(T data);
 }

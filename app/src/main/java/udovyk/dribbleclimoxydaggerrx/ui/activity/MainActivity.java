@@ -88,7 +88,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
 
     @Override
     public void setupDrawerToggleButton() {
-        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
 
     @Override
     public void selectDrawerItem(MenuItem menuItem) {
-        int id  = menuItem.getItemId();
+        int id = menuItem.getItemId();
         if (id == R.id.logout_item) {
             menuItem.setChecked(true);
             presenter.clearSharedPref();

@@ -1,6 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.network;
 
 import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -21,7 +22,6 @@ public interface ApiService {
     /**
      * The call to request a token
      */
-
     @POST
     @FormUrlEncoded
     Observable<Response<OAuthToken>> getAcccessToken(
@@ -31,17 +31,6 @@ public interface ApiService {
             @Field("code") String code,
             @Field("redirect_uri") String redirect_uri
 
-    );
-
-    /**
-     * The call to refresh a token
-     */
-    @FormUrlEncoded
-    @POST("oauth/token")
-    Observable<OAuthToken> refreshAccessToken(
-            @Field("refresh_token") String refresh_token,
-            @Field("client_id") String client_id,
-            @Field("client_secret") String client_secret
     );
 
     /**
@@ -73,7 +62,6 @@ public interface ApiService {
     * */
     @GET("shots/{id}/attachments")
     Observable<Response<List<Attachment>>> getShotAttachments(@Path("id") long shotId);
-
 
 
 }

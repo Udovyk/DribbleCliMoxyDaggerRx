@@ -42,11 +42,10 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
                 case Screens.SHOTS_FRAGMENT_SCREEN:
                     return ShotsFragment.newInstance();
                 case Screens.SHOT_DETAILS_FRAGMENT_SCREEN:
-                    ShotDetailsFragment detailsFragment = ShotDetailsFragment.newInstance();
-                    //pass data
+                    ShotDetailsFragment detailsFragment = ShotDetailsFragment.newInstance((Bundle) data);
                     return detailsFragment;
                 case Screens.SHOT_ATTACHMENTS_FRAGMENT_SCREEN:
-                    //return ShotAttachmentsFragment.newInstance();
+                    return ShotAttachmentsFragment.newInstance((Bundle) data);
             }
             return null;
         }
@@ -62,8 +61,8 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
         }
     };
 
-        public ActivityComponent activityComponent;
-        private Unbinder unbinder;
+    public ActivityComponent activityComponent;
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
 
     @Override
     protected void onDestroy() {
-        if(unbinder!=null){
+        if (unbinder != null) {
             unbinder.unbind();
         }
         super.onDestroy();
@@ -82,7 +81,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
 
     public void initViews() {
         setContentView(getLayoutRes());
-        unbinder =  ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
     }
 
     ApplicationComponent getApplicationComponent() {

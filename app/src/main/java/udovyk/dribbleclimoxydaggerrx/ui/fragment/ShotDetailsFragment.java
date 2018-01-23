@@ -3,6 +3,7 @@ package udovyk.dribbleclimoxydaggerrx.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +49,9 @@ public class ShotDetailsFragment extends BaseFragment implements ShotDetailView 
 
     Bundle bundle;
 
-    public static ShotDetailsFragment newInstance() {
+    public static ShotDetailsFragment newInstance(Bundle bundle) {
         ShotDetailsFragment fragment = new ShotDetailsFragment();
-        /*Bundle args = new Bundle();
-        fragment.setArguments(args)*/;
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -59,8 +59,7 @@ public class ShotDetailsFragment extends BaseFragment implements ShotDetailView 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        savedInstanceState = getArguments();
-        bundle = savedInstanceState;
+        bundle = getArguments();
     }
 
     @Nullable
@@ -68,24 +67,18 @@ public class ShotDetailsFragment extends BaseFragment implements ShotDetailView 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
         presenter.setData(bundle);
+
+        shotImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString(ShotDetailConstants.IMAGE_URL, bundle.getString(ShotDetailConstants.IMAGE_URL));
+                data.putInt(ShotDetailConstants.ID, bundle.getInt(ShotDetailConstants.ID));
+
+                presenter.onItemClick(data);
+            }
+        });
         return v;
-    }
-
-    @OnClick (R.id.shot_detail_image)
-    void showFullImageFragment() {
-        /*if (getFragmentManager().findFragmentByTag(ShotAttachmentsFragment.TAG) == null) {
-            ShotAttachmentsFragment shotFullImageFragment = new ShotAttachmentsFragment();
-            Bundle bundleLocal = new Bundle();
-            bundleLocal.putString(ShotDetailConstants.IMAGE_URL, bundle.getString(ShotDetailConstants.IMAGE_URL));
-            bundleLocal.putInt(ShotDetailConstants.ID, bundle.getInt(ShotDetailConstants.ID));
-            shotFullImageFragment.setArguments(bundleLocal);
-            getFragmentManager().beginTransaction()
-                    .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                    .add(R.id.drawer_layout, shotFullImageFragment, ShotAttachmentsFragment.TAG)
-                    .addToBackStack(null)
-                    .commit();
-
-        }*/
     }
 
     @Override
@@ -104,6 +97,8 @@ public class ShotDetailsFragment extends BaseFragment implements ShotDetailView 
                 e.printStackTrace();
                 description.setText("");
             }
+        } else {
+            Log.d(TAG, "-----Bundle == null ----");
         }
     }
 

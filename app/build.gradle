@@ -44,7 +44,6 @@ def okHttpVer = '3.6.0'
 def moxyVer = '1.5.3'
 def rxVer = '2.0.1'
 
-//\todo fix def versions for dager, ui, support
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 

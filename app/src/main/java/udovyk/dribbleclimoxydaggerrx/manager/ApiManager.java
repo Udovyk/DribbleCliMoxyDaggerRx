@@ -14,7 +14,6 @@ import udovyk.dribbleclimoxydaggerrx.network.model.Attachment;
 import udovyk.dribbleclimoxydaggerrx.network.model.OAuthToken;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
 import udovyk.dribbleclimoxydaggerrx.network.model.User;
-import udovyk.dribbleclimoxydaggerrx.network.retrofit.RetrofitBuilder;
 
 public class ApiManager {
 

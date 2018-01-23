@@ -2,6 +2,7 @@ package udovyk.dribbleclimoxydaggerrx.ui.view;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -24,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import udovyk.dribbleclimoxydaggerrx.R;
+import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ViewModel;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
 import udovyk.dribbleclimoxydaggerrx.ui.adapters.ItemClickListener;
@@ -34,8 +36,8 @@ import udovyk.dribbleclimoxydaggerrx.ui.adapters.ItemClickListener;
 
 public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
     private static final String TAG = "ShotItemView";
+
     ItemClickListener itemClickListener;
-    private int position;
 
     @BindView(R.id.imShotItem)
     ImageView imShotItem;
@@ -45,6 +47,8 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
     TextView tvShotAutor;
     @BindView(R.id.tvShotDate)
     TextView tvShotDate;
+
+    Shot shot;
 
     public ShotItemView(Context context) {
         super(context);
@@ -67,7 +71,6 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
     }
 
     private void init(Context context) {
-        //View view = inflate(getContext(), R.layout.shots_item, (ViewGroup) getRootView());
         LayoutInflater.from(context).inflate(R.layout.shots_item, this);
         ButterKnife.bind(this);
     }
@@ -77,6 +80,7 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
         if (mData == null) {
             return;
         }
+        shot = mData;
 
         Log.d(TAG, mData.getDescription() + "-------");
         Picasso.with(getContext())
@@ -102,18 +106,26 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
 
     @OnClick(R.id.cvShot)
     public void onClick() {
-        itemClickListener.onClick(position);
+        itemClickListener.onClick(setDataToBundle(shot));
     }
+
     @OnClick(R.id.imShotItem)
     public void onClick1() {
-        itemClickListener.onClick(position);
+        itemClickListener.onClick(setDataToBundle(shot));
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    private Bundle setDataToBundle(Shot shot) {
+        Bundle bundle = new Bundle();
+        bundle.putString(ShotDetailConstants.TITLE, shot.getTitle());
+        bundle.putString(ShotDetailConstants.DESCRIPTION, shot.getDescription());
+
+        bundle.putString(ShotDetailConstants.IMAGE_URL, shot.getImages().getNormal());
+        bundle.putInt(ShotDetailConstants.LIKES_COUNT, shot.getLikesCount());
+        bundle.putInt(ShotDetailConstants.VIEWS_COUNT, shot.getViewsCount());
+        bundle.putInt(ShotDetailConstants.COMMENTS_COUNT, shot.getCommentsCount());
+        bundle.putInt(ShotDetailConstants.ID, shot.getId());
+        return bundle;
     }
-
-
 
     public void setClickListener(ItemClickListener clickListener) {
         this.itemClickListener = clickListener;

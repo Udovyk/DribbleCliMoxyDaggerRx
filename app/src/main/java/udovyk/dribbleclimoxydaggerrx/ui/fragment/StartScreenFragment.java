@@ -42,14 +42,14 @@ public class StartScreenFragment extends BaseFragment implements StartScreenView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ((MainActivity)getActivity()).lockDrawer();
+        ((MainActivity) getActivity()).lockDrawer();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((MainActivity)getActivity()).unlockDrawer();
+        ((MainActivity) getActivity()).unlockDrawer();
     }
 
     @Override
