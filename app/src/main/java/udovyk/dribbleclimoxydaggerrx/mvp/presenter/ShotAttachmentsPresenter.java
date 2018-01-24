@@ -35,8 +35,8 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
                     for (Attachment at : listResponse.body()) {
                         listOfAttachments.add(at.getUrl());
                         Log.d(TAG, "---att was added to list : url = " + at.getUrl() + "---");
-                        getViewState().showViewPager();
                     }
+                    getViewState().showViewPager();
                 },
                 throwable -> {
                     Log.d(TAG, "--- Something was failed while requesting attachments ( ----");

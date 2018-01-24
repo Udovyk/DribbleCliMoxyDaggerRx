@@ -119,7 +119,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
         rvShotsList.setAdapter(adapter);
 
 
-        rvShotsList.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
+                rvShotsList.addOnScrollListener(new PaginationScrollListener(mLayoutManager) {
             @Override
             protected void loadMoreItems() {
                 isLoading = true;
@@ -183,7 +183,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
 
             //make sort by comments
             case R.id.sort_most_commented:
-                sortValue = ShotsRequestConstants.SORT_BY_COMMENTS;
+                sortValue= ShotsRequestConstants.SORT_BY_COMMENTS;
                 adapter.getShotsList().clear();
                 adapter.notifyDataSetChanged();
                 currentPage = 1;
@@ -244,6 +244,8 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     public void injectDependencies() {
         getFragmentComponent().inject(this);
     }
+
+
 
 
 }

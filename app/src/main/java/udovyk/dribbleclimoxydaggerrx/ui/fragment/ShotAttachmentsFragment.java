@@ -109,6 +109,7 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
     public void showViewPager() {
 
         adapter = new ImagePagerAdapter(listOfAttachments);
+
         viewPager.setOffscreenPageLimit(listOfAttachments.size() - 1);
         Log.d(TAG, "--list consists of next elements: ");
         for (String s : listOfAttachments) {
@@ -130,6 +131,10 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
             }
         });
         presenter.hideStatusBar();
+    }
+
+    public TextView getTvAttachmentsCount() {
+        return tvAttachmentsCount;
     }
 
     @Override
@@ -187,7 +192,6 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
                     .into(imageView);
 
             ((ViewPager) container).addView(imageView, 0);
-
             return imageView;
         }
 
