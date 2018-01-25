@@ -28,6 +28,34 @@ public class Attachment implements Serializable {
     @SerializedName("created_at")
     private Date createdAt;
 
+    public boolean isImage() {
+        return contentType.equals(MimeType.JPEG.toString())
+                || contentType.equals(MimeType.PNG.toString())
+                || contentType.equals(MimeType.GIF.toString())
+                || contentType.equals(MimeType.BMP.toString())
+                || contentType.equals(MimeType.WEBP.toString());
+    }
+
+    public boolean isGif() {
+        return contentType.equals(MimeType.GIF.toString());
+    }
+
+    public boolean isAudio() {
+        return contentType.contains(MimeType.AUDIO.toString());
+    }
+
+    public boolean isVideo() {
+        return contentType.equals(MimeType.MPEG.toString())
+                || contentType.equals(MimeType.MP4.toString())
+                || contentType.equals(MimeType.QUICKTIME.toString())
+                || contentType.equals(MimeType.THREEGPP.toString())
+                || contentType.equals(MimeType.THREEGPP2.toString())
+                || contentType.equals(MimeType.MKV.toString())
+                || contentType.equals(MimeType.WEBM.toString())
+                || contentType.equals(MimeType.TS.toString())
+                || contentType.equals(MimeType.AVI.toString());
+    }
+
     public long getId() {
         return id;
     }

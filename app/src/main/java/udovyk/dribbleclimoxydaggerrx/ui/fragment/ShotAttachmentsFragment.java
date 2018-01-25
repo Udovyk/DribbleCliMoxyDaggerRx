@@ -23,20 +23,24 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import udovyk.dribbleclimoxydaggerrx.R;
 import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
 import udovyk.dribbleclimoxydaggerrx.mvp.presenter.ShotAttachmentsPresenter;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotAttachmentsView;
+import udovyk.dribbleclimoxydaggerrx.network.model.Attachment;
+import udovyk.dribbleclimoxydaggerrx.ui.adapters.ViewPagerAdapter;
 
 /**
  * Created by udovik.s on 10.01.2018.
  */
 
-public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachmentsView {
+public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachmentsView, ViewPager.OnPageChangeListener {
     public static final String TAG = "ShotAttachmentsFragment";
 
+    //region di, bind
     @InjectPresenter
     ShotAttachmentsPresenter presenter;
 
@@ -45,14 +49,15 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
     @BindView(R.id.pb_attachments)
     ProgressBar pbAttachments;
     @BindView(R.id.view_pager)
-    ViewPager viewPager;
+    ViewPager mViewPager;
+    //endregion
 
-    private ArrayList<String> listOfAttachments = new ArrayList<>();
+    private List<Attachment> mData = new ArrayList<>();
+    protected int mPreviousPos = 0;
 
-    ImagePagerAdapter adapter;
+    protected ViewPagerAdapter mAdapter;
 
     private Bundle bundle;
-
 
     public static ShotAttachmentsFragment newInstance(Bundle bundle) {
         ShotAttachmentsFragment fragment = new ShotAttachmentsFragment();
@@ -76,9 +81,59 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
 
         int idOfShot = bundle.getInt(ShotDetailConstants.ID);
 
-        presenter.addAttachmentsToList(listOfAttachments, idOfShot);
+        presenter.addAttachmentsToList(mData, idOfShot);
 
         return v;
+    }
+
+    public void showViewPager() {
+
+        if (mData == null) {
+            Log.d(TAG, "---list of attachments == null ----");
+            return;
+        }
+
+        mAdapter = new ViewPagerAdapter(getFragmentManager());
+
+        for (Attachment model : mData) {
+            mAdapter.addFragment(ItemViewerFragment.newInstance(model));
+        }
+
+        mViewPager.addOnPageChangeListener(this);
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setCurrentItem(mPreviousPos, false);
+    }
+    @Override
+    public void showLoadingPb() {
+        pbAttachments.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void hideLoadingPb() {
+        pbAttachments.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        try {
+            ((ItemViewerFragment) mAdapter.getItem(mPreviousPos)).imHiddenNow();
+            ((ItemViewerFragment) mAdapter.getItem(position)).imVisibleNow();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mPreviousPos = position;
+        tvAttachmentsCount.setText(position + 1 + "/" + mData.size());
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        tvAttachmentsCount.setText(position + 1 + "/" + mData.size());
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     @Override
@@ -105,34 +160,6 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
-    @Override
-    public void showViewPager() {
-
-        adapter = new ImagePagerAdapter(listOfAttachments);
-
-        viewPager.setOffscreenPageLimit(listOfAttachments.size() - 1);
-        Log.d(TAG, "--list consists of next elements: ");
-        for (String s : listOfAttachments) {
-            Log.d(TAG, s);
-        }
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                tvAttachmentsCount.setText(position + 1 + "/" + listOfAttachments.size());
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-        presenter.hideStatusBar();
-    }
-
     public TextView getTvAttachmentsCount() {
         return tvAttachmentsCount;
     }
@@ -147,57 +174,4 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
         getFragmentComponent().inject(this);
     }
 
-
-    private class ImagePagerAdapter extends PagerAdapter {
-        private ArrayList<String> mImages;
-
-        public ImagePagerAdapter(ArrayList<String> mas) {
-            this.mImages = mas;
-        }
-
-        @Override
-        public int getCount() {
-            return mImages.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == ((ImageView) object);
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            Context context = getContext();
-            ImageView imageView = new ImageView(context);
-
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            if (position != 0) {
-                pbAttachments.setVisibility(View.VISIBLE);
-            }
-            Glide.with(getContext())
-                    .load(mImages.get(position))
-                    .thumbnail(0.3f)
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            pbAttachments.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(imageView);
-
-            ((ViewPager) container).addView(imageView, 0);
-            return imageView;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            ((ViewPager) container).removeView((ImageView) object);
-        }
-    }
 }

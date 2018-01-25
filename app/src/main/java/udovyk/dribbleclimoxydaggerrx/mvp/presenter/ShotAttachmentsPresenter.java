@@ -5,6 +5,7 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,25 +30,24 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
     }
 
 
-    public void addAttachmentsToList(ArrayList<String> listOfAttachments, int idOfShot) {
+    public void addAttachmentsToList(List<Attachment> listOfAttachments, int idOfShot) {
+        getViewState().hideStatusBar();
+        getViewState().showLoadingPb();
         apiManager.callForShotsAttachmetns(idOfShot).subscribe(
                 listResponse -> {
                     for (Attachment at : listResponse.body()) {
-                        listOfAttachments.add(at.getUrl());
+                        listOfAttachments.add(at);
                         Log.d(TAG, "---att was added to list : url = " + at.getUrl() + "---");
                     }
+
                     getViewState().showViewPager();
+                    getViewState().hideLoadingPb();
                 },
                 throwable -> {
                     Log.d(TAG, "--- Something was failed while requesting attachments ( ----");
                     throwable.printStackTrace();
                 }
         );
-
-
     }
 
-    public void hideStatusBar() {
-        getViewState().hideStatusBar();
-    }
 }

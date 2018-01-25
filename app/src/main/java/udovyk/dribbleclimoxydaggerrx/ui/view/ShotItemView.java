@@ -118,7 +118,6 @@ public class ShotItemView extends LinearLayout implements ViewModel<Shot> {
         Bundle bundle = new Bundle();
         bundle.putString(ShotDetailConstants.TITLE, shot.getTitle());
         bundle.putString(ShotDetailConstants.DESCRIPTION, shot.getDescription());
-
         bundle.putString(ShotDetailConstants.IMAGE_URL, shot.getImages().getNormal());
         bundle.putInt(ShotDetailConstants.LIKES_COUNT, shot.getLikesCount());
         bundle.putInt(ShotDetailConstants.VIEWS_COUNT, shot.getViewsCount());

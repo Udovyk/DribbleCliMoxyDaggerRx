@@ -5,8 +5,13 @@ package udovyk.dribbleclimoxydaggerrx.mvp.view;
  */
 
 public interface ShotAttachmentsView extends BaseMvpView {
+
     void hideStatusBar();
 
     void showViewPager();
+
+    void showLoadingPb();
+
+    void hideLoadingPb();
 
 }
