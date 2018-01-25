@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2014 nohana, Inc.
- * Copyright 2017 Zhihu Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package udovyk.dribbleclimoxydaggerrx.network.model;
 
 import android.content.ContentResolver;
@@ -27,13 +11,6 @@ import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Set;
 
-/**
- * MIME Type enumeration to restrict selectable media on the selection activity. Matisse only supports images and
- * videos.
- * <p>
- * Good example of mime types Android supports:
- * https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/media/java/android/media/MediaFile.java
- */
 @SuppressWarnings("unused")
 public enum MimeType {
 
@@ -136,15 +113,12 @@ public enum MimeType {
         }
         String type = map.getExtensionFromMimeType(resolver.getType(uri));
         String path = null;
-        // lazy load the path and prevent resolve for multiple times
         boolean pathParsed = false;
         for (String extension : mExtensions) {
             if (extension.equals(type)) {
                 return true;
             }
             if (!pathParsed) {
-                // we only resolve the path for one time
-//                path = PhotoMetadataUtils.getPath(resolver, uri);
                 if (!TextUtils.isEmpty(path)) {
                     path = path.toLowerCase(Locale.US);
                 }

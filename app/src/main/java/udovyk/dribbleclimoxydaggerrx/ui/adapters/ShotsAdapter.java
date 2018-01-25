@@ -2,7 +2,6 @@ package udovyk.dribbleclimoxydaggerrx.ui.adapters;
 
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import udovyk.dribbleclimoxydaggerrx.R;
-import udovyk.dribbleclimoxydaggerrx.common.ShotDetailConstants;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
 import udovyk.dribbleclimoxydaggerrx.ui.view.ShotItemView;
 
@@ -29,7 +27,6 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private boolean isLoadingAdded = false;
 
     private ItemClickListener mItemClickListener;
-
 
     @Inject
     public ShotsAdapter(Context context) {
@@ -166,10 +163,6 @@ public class ShotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         }
     }
-
-
-
-
 
 
 }

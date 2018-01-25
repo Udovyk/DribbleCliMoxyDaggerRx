@@ -1,9 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,15 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +38,7 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
 
     @BindView(R.id.tv_attachment_count)
     TextView tvAttachmentsCount;
-    @BindView(R.id.pb_attachments)
-    ProgressBar pbAttachments;
+
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
     //endregion
@@ -102,14 +93,6 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
         mViewPager.addOnPageChangeListener(this);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mPreviousPos, false);
-    }
-    @Override
-    public void showLoadingPb() {
-        pbAttachments.setVisibility(View.VISIBLE);
-    }
-    @Override
-    public void hideLoadingPb() {
-        pbAttachments.setVisibility(View.GONE);
     }
 
     @Override

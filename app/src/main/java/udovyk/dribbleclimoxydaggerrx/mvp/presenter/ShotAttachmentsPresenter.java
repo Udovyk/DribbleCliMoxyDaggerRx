@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,7 +31,6 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
 
     public void addAttachmentsToList(List<Attachment> listOfAttachments, int idOfShot) {
         getViewState().hideStatusBar();
-        getViewState().showLoadingPb();
         apiManager.callForShotsAttachmetns(idOfShot).subscribe(
                 listResponse -> {
                     for (Attachment at : listResponse.body()) {
@@ -41,7 +39,6 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
                     }
 
                     getViewState().showViewPager();
-                    getViewState().hideLoadingPb();
                 },
                 throwable -> {
                     Log.d(TAG, "--- Something was failed while requesting attachments ( ----");

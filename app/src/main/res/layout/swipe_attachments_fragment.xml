@@ -17,14 +17,6 @@
         android:layout_marginTop="@dimen/attachm_count_size"
         android:textColor="@color/white" />
 
-    <ProgressBar
-        android:id="@+id/pb_attachments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:theme="@style/CircularProgress"
-        android:visibility="gone"
-        />
+
 
 </RelativeLayout>
