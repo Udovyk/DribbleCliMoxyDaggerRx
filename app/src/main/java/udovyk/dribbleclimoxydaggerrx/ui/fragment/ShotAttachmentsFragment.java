@@ -41,6 +41,9 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
 
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
+
+   /* @BindView(R.id.pb_attachments)
+    ProgressBar progressBar;*/
     //endregion
 
     private List<Attachment> mData = new ArrayList<>();
@@ -94,6 +97,7 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mPreviousPos, false);
     }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -157,4 +161,14 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
         getFragmentComponent().inject(this);
     }
 
+
+    @Override
+    public void showProgressbar() {
+        ((ProgressActivityListener) getActivity()).showPb();
+    }
+
+    @Override
+    public void hideProgressbar() {
+        ((ProgressActivityListener) getActivity()).hidePb();
+    }
 }

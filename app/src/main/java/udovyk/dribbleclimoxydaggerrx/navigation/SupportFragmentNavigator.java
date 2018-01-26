@@ -51,7 +51,6 @@ public abstract class SupportFragmentNavigator implements Navigator {
 
     @Override
     public void applyCommand(Command command) {
-        if (fragmentManager.findFragmentByTag(Screens.SHOT_ATTACHMENTS_FRAGMENT_SCREEN) == null) {
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
             if (inAnim != NO_ANIM && outAnim != NO_ANIM) {
                 transaction.setCustomAnimations(inAnim, outAnim, inAnim, outAnim);
@@ -59,7 +58,6 @@ public abstract class SupportFragmentNavigator implements Navigator {
             if (command instanceof Forward) {
                 Forward forward = (Forward) command;
                 Log.d(TAG, "---- passed data = " + forward.getTransitionData().toString() + "----");
-
                 transaction.add(containerId, createFragment(forward.getScreenKey(), forward.getTransitionData()))
                         .addToBackStack(forward.getScreenKey())
                         .commit();
@@ -102,7 +100,6 @@ public abstract class SupportFragmentNavigator implements Navigator {
             } else if (command instanceof SystemMessage) {
                 showSystemMessage(((SystemMessage) command).getMessage());
             }
-        }
     }
 
     private void backToRoot() {

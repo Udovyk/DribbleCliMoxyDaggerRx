@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -40,8 +39,6 @@ import udovyk.dribbleclimoxydaggerrx.network.model.Attachment;
 public class ItemViewerFragment extends Fragment {
 
     //region
-    @BindView(R.id.pb_attachments)
-    ProgressBar pbAttachments;
     @BindView(R.id.imgPreview)
     ImageView imageView;
     @BindView(R.id.video_player_view)
@@ -56,7 +53,6 @@ public class ItemViewerFragment extends Fragment {
 
     private Attachment attachment;
 
-
     public static ItemViewerFragment newInstance(Attachment item) {
         ItemViewerFragment fragment = new ItemViewerFragment();
         Bundle bundle = new Bundle();
@@ -65,10 +61,9 @@ public class ItemViewerFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_preview_item, container, false);
+        View v = inflater.inflate(R.layout.fragment_preview_item, container, false);
         ButterKnife.bind(this, v);
         return v;
     }
@@ -84,15 +79,7 @@ public class ItemViewerFragment extends Fragment {
             return;
         }
 
-        if (attachment.isVideo() || attachment.isAudio()) {
-
-            simpleExoPlayerView.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.GONE);
-            pbAttachments.setVisibility(View.GONE);
-
-            initializePlayer();
-
-        } else if (attachment.isImage() || attachment.isGif()) {
+        if (attachment.isImage() || attachment.isGif()) {
             simpleExoPlayerView.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
 
@@ -104,16 +91,25 @@ public class ItemViewerFragment extends Fragment {
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            pbAttachments.setVisibility(View.GONE);
+                            ((ProgressActivityListener)getActivity()).hidePb();
                             return false;
                         }
+
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            pbAttachments.setVisibility(View.GONE);
+                            ((ProgressActivityListener)getActivity()).hidePb();
                             return false;
                         }
                     })
                     .into(imageView);
+        } else if (attachment.isVideo() || attachment.isAudio()) {
+
+            simpleExoPlayerView.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
+            ((ProgressActivityListener)getActivity()).hidePb();
+
+            initializePlayer();
+
         }
     }
 

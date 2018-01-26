@@ -16,7 +16,6 @@
         android:elevation="@dimen/shot_cv_elevation"
         card_view:cardCornerRadius="@dimen/card_album_radius">
 
-
         <LinearLayout
             android:id="@+id/rel"
             android:layout_width="match_parent"

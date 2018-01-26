@@ -5,23 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/replace_item"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
-            android:visibility="gone" />
-
-        <FrameLayout
-            android:id="@+id/activity_home_fragment_container"
+        <LinearLayout
+            android:id="@+id/replace_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:visibility="gone" />
+
+            <FrameLayout
+                android:id="@+id/activity_home_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pb_attachments"
+            android:layout_width="@dimen/pb_size"
+            android:layout_height="@dimen/pb_size"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:theme="@style/CircularProgress"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nvView"
@@ -35,4 +49,6 @@
         <include layout="@layout/nav_header" />
 
     </android.support.design.widget.NavigationView>
+
+
 </android.support.v4.widget.DrawerLayout>

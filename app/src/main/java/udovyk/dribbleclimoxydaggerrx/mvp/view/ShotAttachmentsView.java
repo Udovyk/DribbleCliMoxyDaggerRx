@@ -10,4 +10,8 @@ public interface ShotAttachmentsView extends BaseMvpView {
 
     void showViewPager();
 
+    void showProgressbar();
+
+    void hideProgressbar();
+
 }

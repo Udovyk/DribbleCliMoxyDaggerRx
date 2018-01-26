@@ -30,12 +30,17 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
 
 
     public void addAttachmentsToList(List<Attachment> listOfAttachments, int idOfShot) {
+        getViewState().showProgressbar();
         getViewState().hideStatusBar();
         apiManager.callForShotsAttachmetns(idOfShot).subscribe(
                 listResponse -> {
                     for (Attachment at : listResponse.body()) {
-                        listOfAttachments.add(at);
-                        Log.d(TAG, "---att was added to list : url = " + at.getUrl() + "---");
+                        if (at.isImage() || at.isGif() || at.isVideo()) {
+                            listOfAttachments.add(at);
+                            Log.d(TAG, "---att was added to list : url = " + at.getUrl() + "---");
+                        } else {
+                            Log.d(TAG, "---bad att type---");
+                        }
                     }
 
                     getViewState().showViewPager();

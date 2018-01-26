@@ -9,7 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -20,13 +22,14 @@ import udovyk.dribbleclimoxydaggerrx.R;
 import udovyk.dribbleclimoxydaggerrx.mvp.presenter.MainActivityPresenter;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.MainActivityView;
 import udovyk.dribbleclimoxydaggerrx.network.model.User;
+import udovyk.dribbleclimoxydaggerrx.ui.fragment.ProgressActivityListener;
 import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
 
 /**
  * Created by udovik.s on 10.01.2018.
  */
 
-public class MainActivity extends BaseActivity implements MainActivityView, ToolbarActions {
+public class MainActivity extends BaseActivity implements MainActivityView, ToolbarActions, ProgressActivityListener {
     private static final String TAG = "MainActivity";
 
     @InjectPresenter
@@ -47,8 +50,11 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     TextView userBio;
     @BindView(R.id.userLocation)
     TextView userLocation;
+    @BindView(R.id.pb_attachments)
+    ProgressBar progressBar;
 
     ActionBarDrawerToggle drawerToggle;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -193,6 +199,16 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     }
 
     @Override
+    public void showPb() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hidePb() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
     public void setUserToNavigationview(User user) {
         if (user != null) {
             Picasso.with(this)
@@ -205,4 +221,6 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
             Log.d(TAG, "setInfoDataToNavView: Can't set data, user=null");
         }
     }
+
+
 }

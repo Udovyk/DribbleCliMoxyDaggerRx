@@ -28,7 +28,7 @@ import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
  * Created by udovik.s on 10.01.2018.
  */
 
-public abstract class BaseActivity extends MvpAppCompatActivity implements BaseMvpView, ToolbarActions {
+public abstract class BaseActivity extends MvpAppCompatActivity implements BaseMvpView, ToolbarActions{
 
     protected Navigator baseNavigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.activity_home_fragment_container, R.anim.enter_from_right) {
 
@@ -126,4 +126,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements BaseM
     public void showToastMessage(int title) {
         Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
     }
+
+
 }

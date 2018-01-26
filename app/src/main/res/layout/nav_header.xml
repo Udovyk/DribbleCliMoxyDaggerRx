@@ -9,7 +9,6 @@
     android:padding="@dimen/hav_header_padding"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/userAvatar"
         android:layout_width="@dimen/hav_header_im_size"
@@ -17,7 +16,6 @@
         android:layout_gravity="center"
         app:civ_border_color="@color/nav_header_im_border"
         app:civ_border_width="@dimen/hav_header_im_border_size" />
-
 
     <TextView
         android:id="@+id/userName"

@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,16 +71,13 @@ public class ShotDetailsFragment extends BaseFragment implements ShotDetailView 
         View v = super.onCreateView(inflater, container, savedInstanceState);
         presenter.setData(bundle);
 
-        shotImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle data = new Bundle();
-                data.putString(ShotDetailConstants.IMAGE_URL, bundle.getString(ShotDetailConstants.IMAGE_URL));
-                data.putInt(ShotDetailConstants.ID, bundle.getInt(ShotDetailConstants.ID));
-
-                presenter.onItemClick(data);
-            }
+        RxView.clicks(shotImage).throttleFirst(300, TimeUnit.MILLISECONDS).subscribe(empty -> {
+            Bundle data = new Bundle();
+            data.putString(ShotDetailConstants.IMAGE_URL, bundle.getString(ShotDetailConstants.IMAGE_URL));
+            data.putInt(ShotDetailConstants.ID, bundle.getInt(ShotDetailConstants.ID));
+            presenter.onItemClick(data);
         });
+
         return v;
     }
 
