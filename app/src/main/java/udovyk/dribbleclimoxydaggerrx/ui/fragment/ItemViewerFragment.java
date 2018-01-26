@@ -32,6 +32,7 @@ import com.google.android.exoplayer2.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import udovyk.dribbleclimoxydaggerrx.R;
 import udovyk.dribbleclimoxydaggerrx.network.model.Attachment;
 
@@ -53,6 +54,8 @@ public class ItemViewerFragment extends Fragment {
 
     private Attachment attachment;
 
+    private Unbinder unbinder;
+
     public static ItemViewerFragment newInstance(Attachment item) {
         ItemViewerFragment fragment = new ItemViewerFragment();
         Bundle bundle = new Bundle();
@@ -64,8 +67,17 @@ public class ItemViewerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_preview_item, container, false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
         return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+        super.onDestroyView();
     }
 
     @Override
@@ -82,6 +94,7 @@ public class ItemViewerFragment extends Fragment {
         if (attachment.isImage() || attachment.isGif()) {
             simpleExoPlayerView.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
+            ((ProgressActivityListener)getActivity()).showPb();
 
             Glide.with(this)
                     .load(attachment.getUrl())
@@ -207,21 +220,6 @@ public class ItemViewerFragment extends Fragment {
         initializePlayer();
     }
 
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
 
 
 }

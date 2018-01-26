@@ -47,6 +47,7 @@ public class StartScreenFragment extends BaseFragment implements StartScreenView
 
     @Override
     public void onDestroyView() {
+        //Todo 2
         super.onDestroyView();
         ((MainActivity) getActivity()).unlockDrawer();
     }

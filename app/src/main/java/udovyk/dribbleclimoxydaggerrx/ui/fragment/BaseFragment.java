@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import udovyk.dribbleclimoxydaggerrx.di.components.ActivityComponent;
 import udovyk.dribbleclimoxydaggerrx.di.components.FragmentComponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.FragmentModule;
-import udovyk.dribbleclimoxydaggerrx.mvp.view.BaseMvpView;
 import udovyk.dribbleclimoxydaggerrx.ui.activity.BaseActivity;
 import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
 
@@ -21,10 +21,10 @@ import udovyk.dribbleclimoxydaggerrx.ui.widget.ToolbarActions;
  * Created by udovik.s on 11.01.2018.
  */
 
-public abstract class BaseFragment  extends MvpAppCompatFragment implements BaseMvpView {
+public abstract class BaseFragment extends MvpAppCompatFragment {
 
     private FragmentComponent fragmentComponent;
-
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,21 +43,25 @@ public abstract class BaseFragment  extends MvpAppCompatFragment implements Base
         return view;
     }
 
-    protected abstract int getLayoutRes();
-
-    public abstract void injectDependencies();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+        super.onDestroyView();
+    }
 
     public void injectViews(View view) {
-        ButterKnife.bind(this, view);
-
+        unbinder = ButterKnife.bind(this, view);
     }
 
     public void hideToolBar() {
-        ((BaseActivity)getActivity()).getSupportActionBar().hide();
+        ((BaseActivity) getActivity()).getSupportActionBar().hide();
     }
 
     public void showToolBar() {
-        ((BaseActivity)getActivity()).getSupportActionBar().show();
+        ((BaseActivity) getActivity()).getSupportActionBar().show();
     }
 
     private ActivityComponent getActivityComponent() {
@@ -84,33 +88,8 @@ public abstract class BaseFragment  extends MvpAppCompatFragment implements Base
         ((ToolbarActions) getActivity()).setSupportToolBar(toolbar);
     }
 
-    @Override
-    public void onError(Throwable e) {
+    protected abstract int getLayoutRes();
 
-    }
+    public abstract void injectDependencies();
 
-    @Override
-    public void showMessage(String title, String message) {
-
-    }
-
-    @Override
-    public void showMessage(String title) {
-
-    }
-
-    @Override
-    public void showMessage(int title, int message) {
-
-    }
-
-    @Override
-    public void showMessage(int title) {
-
-    }
-
-    @Override
-    public void showToastMessage(int title) {
-
-    }
 }

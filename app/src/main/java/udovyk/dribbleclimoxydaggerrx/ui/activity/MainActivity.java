@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     }
 
     public void unlockDrawer() {
-
+        //Todo fix drawer crash back :
         mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         presenter.setUserToNH();
     }

@@ -3,9 +3,11 @@ package udovyk.dribbleclimoxydaggerrx.mvp.view;
 
 import android.view.MenuItem;
 
+import com.arellomobile.mvp.MvpView;
+
 import udovyk.dribbleclimoxydaggerrx.network.model.User;
 
-public interface MainActivityView extends BaseMvpView {
+public interface MainActivityView extends MvpView {
 
     void hideDrawer();
 
