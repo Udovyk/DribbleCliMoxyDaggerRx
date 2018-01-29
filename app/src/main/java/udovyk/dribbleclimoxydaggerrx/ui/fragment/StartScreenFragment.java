@@ -28,8 +28,6 @@ public class StartScreenFragment extends BaseFragment implements StartScreenView
     @InjectPresenter
     StartScreenPresenter presenter;
 
-    @Inject
-    PrefManager prefManager;
 
     public static StartScreenFragment newInstance() {
         StartScreenFragment fragment = new StartScreenFragment();
@@ -43,13 +41,6 @@ public class StartScreenFragment extends BaseFragment implements StartScreenView
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ((MainActivity) getActivity()).lockDrawer();
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onDestroyView() {
-        //Todo 2
-        super.onDestroyView();
-        ((MainActivity) getActivity()).unlockDrawer();
     }
 
     @Override

@@ -34,6 +34,7 @@ import udovyk.dribbleclimoxydaggerrx.common.ShotsRequestConstants;
 import udovyk.dribbleclimoxydaggerrx.mvp.presenter.ShotsPresenter;
 import udovyk.dribbleclimoxydaggerrx.mvp.view.ShotsView;
 import udovyk.dribbleclimoxydaggerrx.network.model.Shot;
+import udovyk.dribbleclimoxydaggerrx.ui.activity.MainActivity;
 import udovyk.dribbleclimoxydaggerrx.ui.adapters.ItemClickListener;
 import udovyk.dribbleclimoxydaggerrx.ui.adapters.ShotsAdapter;
 import udovyk.dribbleclimoxydaggerrx.ui.utils.GridSpacingItemDecoration;
@@ -81,6 +82,7 @@ public class ShotsFragment extends BaseFragment implements ShotsView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainActivity) getActivity()).unlockDrawer();
         setHasOptionsMenu(true);
     }
 

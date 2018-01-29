@@ -115,6 +115,7 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
 
     @Override
     public void onPageSelected(int position) {
+
         tvAttachmentsCount.setText(position + 1 + "/" + mData.size());
     }
 

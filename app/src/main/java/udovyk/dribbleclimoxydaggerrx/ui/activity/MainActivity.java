@@ -98,6 +98,14 @@ public class MainActivity extends BaseActivity implements MainActivityView, Tool
     }
 
     @Override
+    public void onBackPressed() {
+        hideDrawer();
+        presenter.onBackPressed();
+
+    }
+
+
+    @Override
     public void hideDrawer() {
         mDrawer.closeDrawer(GravityCompat.START);
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -68,6 +69,7 @@ public class ItemViewerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_preview_item, container, false);
         unbinder = ButterKnife.bind(this, v);
+
         return v;
     }
 
@@ -90,21 +92,21 @@ public class ItemViewerFragment extends Fragment {
         if (attachment == null) {
             return;
         }
+        ((ProgressActivityListener)getActivity()).showPb();
 
         if (attachment.isImage() || attachment.isGif()) {
             simpleExoPlayerView.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
-            ((ProgressActivityListener)getActivity()).showPb();
 
             Glide.with(this)
                     .load(attachment.getUrl())
-                    .placeholder(android.R.color.black)
                     .fitCenter()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                             ((ProgressActivityListener)getActivity()).hidePb();
+                            Toast.makeText(getContext(), "attachment failed", Toast.LENGTH_SHORT).show();
                             return false;
                         }
 

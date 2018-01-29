@@ -67,6 +67,10 @@ public class MainActivityPresenter extends BasePresenter<MainActivityView> {
         }
     }
 
+    public void onBackPressed() {
+        router.exit();
+    }
+
 
     public void clearSharedPref() {
         prefManager.clearSharedPref();

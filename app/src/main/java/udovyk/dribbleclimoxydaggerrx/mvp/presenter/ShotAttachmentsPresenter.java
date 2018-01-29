@@ -42,7 +42,6 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
                             Log.d(TAG, "---bad att type---");
                         }
                     }
-
                     getViewState().showViewPager();
                 },
                 throwable -> {

@@ -43,6 +43,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
         return view;
     }
 
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

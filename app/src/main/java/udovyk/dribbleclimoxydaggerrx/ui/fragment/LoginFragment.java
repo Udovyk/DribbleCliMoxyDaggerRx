@@ -57,13 +57,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
-    public void onDestroy() {
-        //Todo 1
-        super.onDestroy();
-        ((MainActivity) getActivity()).unlockDrawer();
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.clearWebView();
