@@ -1,5 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.di.modules;
 
+import android.support.v7.app.AppCompatActivity;
+
 import dagger.Module;
 
 /**
@@ -9,5 +11,9 @@ import dagger.Module;
 @Module
 public class ActivityModule {
 
-    public ActivityModule() {}
+    AppCompatActivity activity;
+
+    public ActivityModule(AppCompatActivity activity) {
+        this.activity = activity;
+    }
 }

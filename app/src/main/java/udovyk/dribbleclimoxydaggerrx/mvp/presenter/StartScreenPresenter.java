@@ -1,12 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
-import android.widget.Toast;
-
 import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpView;
-
 import javax.inject.Inject;
-
 import ru.terrakok.cicerone.Router;
 import udovyk.dribbleclimoxydaggerrx.App;
 import udovyk.dribbleclimoxydaggerrx.Screens;

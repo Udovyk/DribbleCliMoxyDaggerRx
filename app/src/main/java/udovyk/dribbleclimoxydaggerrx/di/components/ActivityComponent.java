@@ -1,13 +1,9 @@
 package udovyk.dribbleclimoxydaggerrx.di.components;
 
-import dagger.Component;
 import dagger.Subcomponent;
 import udovyk.dribbleclimoxydaggerrx.di.modules.ActivityModule;
-import udovyk.dribbleclimoxydaggerrx.di.modules.ApplicationModule;
 import udovyk.dribbleclimoxydaggerrx.di.modules.FragmentModule;
 import udovyk.dribbleclimoxydaggerrx.di.scopes.ActivityScope;
-import udovyk.dribbleclimoxydaggerrx.di.scopes.ApplicationScope;
-import udovyk.dribbleclimoxydaggerrx.mvp.presenter.MainActivityPresenter;
 import udovyk.dribbleclimoxydaggerrx.ui.activity.MainActivity;
 
 /**
