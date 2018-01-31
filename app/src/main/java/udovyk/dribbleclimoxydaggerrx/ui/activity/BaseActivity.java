@@ -66,7 +66,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements Toolb
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        activityComponent = getApplicationComponent().providesActivityComponent(new ActivityModule());
+        activityComponent = getApplicationComponent().providesActivityComponent(new ActivityModule(this));
         super.onCreate(savedInstanceState);
         initViews();
     }

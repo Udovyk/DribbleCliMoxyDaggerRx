@@ -92,12 +92,12 @@ public class ItemViewerFragment extends Fragment {
         if (attachment == null) {
             return;
         }
-        ((ProgressActivityListener)getActivity()).showPb();
+
 
         if (attachment.isImage() || attachment.isGif()) {
             simpleExoPlayerView.setVisibility(View.GONE);
             imageView.setVisibility(View.VISIBLE);
-
+            ((ProgressActivityListener)getActivity()).showPb();
             Glide.with(this)
                     .load(attachment.getUrl())
                     .fitCenter()
