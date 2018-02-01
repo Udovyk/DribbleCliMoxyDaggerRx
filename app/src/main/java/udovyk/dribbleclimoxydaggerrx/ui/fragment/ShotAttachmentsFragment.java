@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
@@ -82,8 +83,9 @@ public class ShotAttachmentsFragment extends BaseFragment implements ShotAttachm
 
     public void showViewPager() {
 
-        if (mData == null) {
-            Log.d(TAG, "---list of attachments == null ----");
+        if (mData.size() == 0) {
+            Toast.makeText(getContext(), "Attachment cant be displayed", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "---list size = 0 ");
             return;
         }
 

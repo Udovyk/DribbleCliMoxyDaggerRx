@@ -1,6 +1,7 @@
 package udovyk.dribbleclimoxydaggerrx.mvp.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
 
@@ -39,7 +40,8 @@ public class ShotAttachmentsPresenter extends BasePresenter<ShotAttachmentsView>
                             listOfAttachments.add(at);
                             Log.d(TAG, "---att was added to list : url = " + at.getUrl() + "---");
                         } else {
-                            Log.d(TAG, "---bad att type---");
+                            Log.d(TAG, "---bad att type--- list size" + listOfAttachments.size());
+                            getViewState().hideProgressbar();
                         }
                     }
                     getViewState().showViewPager();
